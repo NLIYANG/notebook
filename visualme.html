@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>More about Me (In Charts)</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Alpine.js (optional) -->
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- D3.js -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://unpkg.com/topojson-client@3"></script>
+
+</head>
+<body class="font-sans text-gray-900">
+
+  
+  <!-- NAVIGATION -->
+  <nav class="fixed w-full bg-white bg-opacity-70 backdrop-blur-md z-10">
+    <div class="max-w-4xl mx-auto flex items-center justify-between p-4">
+      <a href="index.html" class="text-xl font-bold">Liyang Ng</a>
+      <div class="space-x-6">
+        <a href="index.html" class="hover:text-blue-600">Home</a>
+        <a href="work.html" class="hover:text-blue-600">Work</a>
+        <a href="#charts" class="hover:text-blue-600">Charts</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT FORMATTING ONLY-->
+  <main id="charts" class="pt-20 max-w-4xl mx-auto px-4 space-y-12">
+    <h1 class="text-3xl sm:text-4xl font-bold">More about Me (In Charts)</h1>
+
+    <!-- 1) Weekly Activities Bar Chart -->
+    <section id="weekly-activities" class="bg-white p-6 rounded shadow">
+      <h2 class="text-2xl font-semibold mb-4">Weekly Activities (Hours per Week)</h2>
+      <div class="relative w-full h-64">
+        <canvas id="weeklyActivitiesChart" class="absolute inset-0 w-full h-full"></canvas>
+      </div>
+    </section>
+
+    <!-- 2) Skills Radar Chart -->
+    <section id="skills-proficiency" class="bg-white p-6 rounded shadow">
+      <h2 class="text-2xl font-semibold mb-4">Skill Proficiencies (1–10)</h2>
+      <div class="relative w-full h-64">
+        <canvas id="skillsRadarChart" class="absolute inset-0 w-full h-full"></canvas>
+      </div>
+    </section>
+
+    <!-- 3) Milestones Timeline -->
+    <section id="milestones-timeline" class="bg-white p-6 rounded shadow">
+      <h2 class="text-2xl font-semibold mb-4">Milestones Timeline</h2>
+      <div id="milestonesTimeline" class="w-full h-64"></div>
+    </section>
+
+    <!-- 4) Places Map -->
+    <section id="places-map" class="bg-white p-6 rounded shadow">
+      <h2 class="text-2xl font-semibold mb-4">Places I've Been</h2>
+      <div id="placesMap" class="w-full h-64"></div>
+    </section>
+
+
+    <!-- 6) Goals Progress Bars -->
+    <section id="goals-progress" class="bg-white p-6 rounded shadow">
+      <h2 class="text-2xl font-semibold mb-4">Goals Progress</h2>
+      <div id="goalsProgressContainer" class="space-y-4">
+        <div>
+          <p class="font-medium">Read 50 Books</p>
+          <div class="bg-gray-200 rounded-full h-4">
+            <div class="bg-blue-600 h-4 rounded-full" style="width: 30%;"></div>
+          </div>
+        </div>
+        <div>
+          <p class="font-medium">Run 100 Miles</p>
+          <div class="bg-gray-200 rounded-full h-4">
+            <div class="bg-green-600 h-4 rounded-full" style="width: 60%;"></div>
+          </div>
+        </div>
+        <div>
+          <p class="font-medium">Learn React</p>
+          <div class="bg-gray-200 rounded-full h-4">
+            <div class="bg-yellow-600 h-4 rounded-full" style="width: 45%;"></div>
+          </div>
+        </div>
+        <div>
+          <p class="font-medium">Perfect Espresso</p>
+          <div class="bg-gray-200 rounded-full h-4">
+            <div class="bg-red-600 h-4 rounded-full" style="width: 50%;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7) Productivity Heatmap -->
+    <section id="productivity-heatmap" class="bg-white p-6 rounded shadow">
+      <h2 class="text-2xl font-semibold mb-4">Productivity Heatmap</h2>
+      <div id="productivityHeatmap" class="w-full h-64"></div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-800 text-gray-400 py-4 text-center mt-12">
+    &copy; 2025 Liyang Ng. All rights reserved.
+  </footer>
+
+
+  
+  <!-- SCRIPT: initialize charts with sample data CODEEE -->
+  <script>
+    // 1) Weekly Activities Bar Chart
+    const ctxWeekly = document.getElementById('weeklyActivitiesChart').getContext('2d');
+    new Chart(ctxWeekly, {
+      type: 'bar',
+      data: {
+        labels: ['Coding', 'Reading', 'Running', 'Coffee Brewing', 'Music Practice'],
+        datasets: [{
+          label: 'Hours per Week',
+          data: [15, 5, 4, 7, 6],
+          backgroundColor: ['#3B82F6','#10B981','#F59E0B','#EF4444','#8B5CF6']
+        }]
+      },
+      options: { responsive: true, maintainAspectRatio: false }
+    });
+
+
+
+    
+
+    // 2) Skills Radar Chart
+    const ctxRadar = document.getElementById('skillsRadarChart').getContext('2d');
+    new Chart(ctxRadar, {
+      type: 'radar',
+      data: {
+        labels: ['JavaScript','Python','Power BI','Communication','Leadership'],
+        datasets: [{
+          label: 'Skill Level',
+          data: [8,7,9,8,7],
+          backgroundColor: 'rgba(59,130,246,0.2)',
+          borderColor: '#3B82F6'
+        }]
+      },
+      options: { responsive: true, maintainAspectRatio: false }
+    });
+
+
+
+    
+    // 5) Coffee vs. Coding Scatter Plot
+    
+
+    
+
+    
+    // 6) Goals Progress Bars - dynamic update
+    (function(){
+      const goals = [
+        { text:'Read 50 Books', pct:30 },
+        { text:'Run 100 Miles', pct:60 },
+        { text:'Learn React', pct:45 },
+        { text:'Perfect Espresso', pct:50 }
+      ];
+      const container = document.getElementById('goalsProgressContainer');
+      container.innerHTML = '';
+      goals.forEach(g=>{
+        const div = document.createElement('div');
+        div.innerHTML = `
+          <p class="font-medium">${g.text}</p>
+          <div class="bg-gray-200 rounded-full h-4">
+            <div class="bg-blue-600 h-4 rounded-full" style="width: ${g.pct}%;"></div>
+          </div>`;
+        container.appendChild(div);
+      });
+    })();
+
+
+
+
+
+
+
+    
+    // 7) Productivity Heatmap (D3.js)
+    (function(){
+      const data = [];
+      // generate random productivity 0-10 for every hour (0-23) and day (0-6)
+      for(let day=0;day<7;day++){
+        for(let hour=0;hour<24;hour++){
+          data.push({day,hour,value:Math.floor(Math.random()*11)});
+        }
+      }
+      const cellSize = 16;
+      const svg = d3.select('#productivityHeatmap')
+        .append('svg')
+        .attr('width', cellSize*24 + 60)
+        .attr('height', cellSize*7 + 40);
+      const color = d3.scaleSequential(d3.interpolateBlues).domain([0,10]);
+      svg.selectAll('rect')
+        .data(data).enter()
+        .append('rect')
+        .attr('x', d=>d.hour*cellSize + 50)
+        .attr('y', d=>d.day*cellSize + 20)
+        .attr('width', cellSize)
+        .attr('height', cellSize)
+        .attr('fill', d=>color(d.value));
+      // axes labels
+      svg.selectAll('text.hour')
+        .data(d3.range(24)).enter()
+        .append('text')
+        .attr('class','hour')
+        .attr('x',(d,i)=>i*cellSize+50)
+        .attr('y',12)
+        .attr('text-anchor','middle')
+        .attr('font-size','8px')
+        .text(d=>d);
+      svg.selectAll('text.day')
+        .data(['Sun','Mon','Tue','Wed','Thu','Fri','Sat']).enter()
+        .append('text')
+        .attr('class','day')
+        .attr('x',10)
+        .attr('y',(d,i)=>i*cellSize+32)
+        .attr('text-anchor','end')
+        .attr('font-size','8px')
+        .text(d=>d);
+    })();
+  </script>
+</body>
+</html>
+
