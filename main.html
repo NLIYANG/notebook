@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- 1) In your <head>, include Chart.js via CDN (LOAD PACKAGES)-->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liyang Ng | Portfolio</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Alpine.js for interactivity -->
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <!-- Alpine component for Projects -->
+  <script>
+    function projectsData() {
+      return {
+        filter: '',
+        projects: [
+          { id: 1, title: 'Bible Olympics', desc: 'Interactive Bible quiz and games.', img: 'bibleolympics.jpg', url: '#' },
+          { id: 2, title: 'Quiz App', desc: 'A fun quiz built with JS & HTML.', img: 'bibleolympics.jpg', url: '#' },
+          { id: 3, title: 'Forecast Dashboard', desc: 'Power BI dashboard for inventory.', img: 'bibleolympics.jpg', url: '#' }
+        ],
+        showModal: false,
+        currentProject: null,A
+        filteredProjects() {
+          return this.projects.filter(p => p.title.toLowerCase().includes(this.filter.toLowerCase()));
+        },
+        openModal(project) {
+          this.currentProject = project;
+          this.showModal = true;
+        }
+      }
+    }
+  </script>
+</head>
+<body class="font-garamond text-gray-900">
+
+
+<!-- NAVIGATION -->
+<nav x-data="{ open: false }" class="fixed w-full bg-white bg-opacity-70 backdrop-blur-md z-10">
+  <div class="max-w-4xl mx-auto flex items-center justify-between p-4">
+    <a href="index.html" class="text-xl">
+      <span class = font-normal">Liyang</span>
+      <span class="font-bold">Ng</span>
+    </a>
+    <button @click="open = !open" class="md:hidden focus:outline-none">
+      <!-- svg icon -->
+    </button>
+    <div class="md:flex space-x-6" :class="{ 'block': open, 'hidden': !open }">
+      <a href="work.html" class="hover:text-blue-600">Work</a>
+      <a href="visualme.html" class="hover:text-blue-600">Me in Charts</a>
+      <a href="index.html#about" class="hover:text-blue-600">About</a>
+      <a href="index.html#contact" class="hover:text-blue-600">Contact</a>
+    </div>
+  </div>
+</nav>
+
+
+      
+  
+  <!-- HERO: Full-screen intro with background image -->
+<header
+  id="hero"
+  class="
+    w-full
+    bg-cover
+    bg-center
+
+    /* Fixed height that scrolls with the page */
+    h-[400px]        /* 400px tall on all screens by default */
+    sm:h-[500px]     /* ≥640px: 500px tall */
+    md:h-[600px]     /* ≥768px: 600px tall */
+  "
+  style="background-image:url('hero.jpg')"
+>
+  <!-- Semi-transparent overlay to boost contrast -->
+  <div class="bg-black bg-opacity-50 w-full h-full flex items-center justify-center">
+    <div class="text-center text-white px-4">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold">
+        Hello, I’m <span class="text-amber-400">Liyang</span>
+      </h1>
+      <p class="mt-2 text-lg sm:text-xl md:text-2xl">
+        Supply Chain Analyst • Developer • Learner
+      </p>
+    </div>
+  </div>
+</header>
+
+
+  <!-- PROJECTS: Filterable gallery with modal details -->
+  <section id="work" x-data="projectsData()" class="pt-16 bg-white py-12">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-4">Selected Work</h2>
+      <!-- Search box -->
+      <input x-model="filter" type="text" placeholder="Search projects..."
+             class="w-full p-2 mb-6 border rounded" />
+      <!-- Grid of project cards -->
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <template x-for="proj in filteredProjects()" :key="proj.id">
+          <div @click="openModal(proj)"
+               class="cursor-pointer overflow-hidden rounded-lg shadow hover:shadow-lg transition">
+            <img :src="proj.img" alt="" class="w-full h-40 object-cover" />
+            <div class="p-4">
+              <h3 class="font-semibold" x-text="proj.title"></h3>
+              <p class="text-sm text-gray-600 mt-1" x-text="proj.desc"></p>
+            </div>
+          </div>
+        </template>
+      </div>
+
+      <!-- Modal for project details -->
+      <div x-show="showModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4" x-cloak>
+        <div @click.away="showModal = false" class="bg-white rounded-lg max-w-md w-full overflow-hidden">
+          <img :src="currentProject.img" alt="" class="w-full h-48 object-cover" />
+          <div class="p-4">
+            <h3 class="text-xl font-bold mb-2" x-text="currentProject.title"></h3>
+            <p class="text-gray-700 mb-4" x-text="currentProject.desc"></p>
+            <a :href="currentProject.url" target="_blank" class="text-blue-600 underline">View Project</a>
+            <button @click="showModal = false" class="block mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT: Short bio with image -->
+  <section id="about" class="bg-gray-100 py-12">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-4">About Me</h2>
+      <img src="headshot.jpg" alt="Liyang Ng" class="w-32 h-32 mx-auto rounded-full mb-4 shadow" />
+      <p class="text-base sm:text-lg leading-relaxed">
+        I’m a passionate analyst and a huge advocate for learning. I love solving problems through data and design, both which are my strenghts. Based in Tampa, FL, I lead youth ministries, build dashboards, and prototype innovative web tools in my spare time.
+      </p>
+    </div>
+  </section>
+
+
+<!-- 2) Somewhere in your <body>, add a new “Hobbies” section -->
+<section id="hobbies" class="py-12 bg-white">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <h2 class="text-2xl sm:text-3xl font-bold mb-6">My Hobbies</h2>
+    <!-- Canvas for the chart -->
+    <canvas id="hobbiesChart" class="w-full h-64"></canvas>
+  </div>
+</section>
+
+<!-- 3) Right before </body>, initialize the chart -->
+<script>
+  const ctx = document.getElementById('hobbiesChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',                          // try 'radar' for a spider-web look
+    data: {
+      labels: ['Guitar', 'Coffee', 'Running', 'Coding', 'Reading'],
+      datasets: [{
+        label: 'Hours per Week',
+        data: [10, 7, 3, 12, 4],           // tweak these values to your real habits
+        backgroundColor: [
+          'rgba(255, 159, 64, 0.6)',
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(153, 102, 255, 0.6)',
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(255, 99, 132, 0.6)'
+        ],
+        borderColor: [
+          'rgba(255, 159, 64, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 99, 132, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,         // lets the h-64 class dictate height
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { stepSize: 2 }
+        }
+      },
+      plugins: {
+        legend: { display: false }
+      }
+    }
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <!-- CONTACT: Simple form for visitors to reach out -->
+  <section id="contact" class="bg-white py-12">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-center">Get In Touch</h2>
+      <form class="space-y-4">
+        <input type="text" placeholder="Name" class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400" />
+        <input type="email" placeholder="Email" class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400" />
+        <textarea placeholder="Message" class="w-full p-2 border rounded h-32 focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER: Simple copyright info -->
+  <footer class="bg-gray-800 text-gray-400 py-4 text-center">
+    &copy; 2025 Liyang Ng. All rights reserved.
+  </footer>
+
+</body>
+</html>
