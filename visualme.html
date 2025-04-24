@@ -165,37 +165,26 @@
 // 3) Coffee vs Coding Data
 const ctxScatter = document
   .getElementById("coffeeCodingChart")
-  .getContext('2d');
+  .getContext("2d");
+
+// <-- your data array, each point now has a `label` property -->
+const scatterData = [
+  { x: 2,  y: 5,  label: "Coded 5 hours, drank 2 cups of coffee" },
+  { x: 3,  y: 7,  label: "Coded 7 hours, drank 3 cups of coffee" },
+  { x: 1,  y: 8,  label: "Coded 8 hours, drank 1 cups of coffee" },
+  { x: 4,  y: 9,  label: "Coded 9 hours, drank 4 cups of coffee" },
+  { x: 3,  y: 8,  label: "Coded 8 hours, drank 3 cups of coffee" },
+  /* …and so on for all your points… */
+];
 
 new Chart(ctxScatter, {
-  type: 'scatter',
+  type: "scatter",
   data: {
     datasets: [{
-      label: 'Daily Cups vs Coding Hours',
-      data: [ 
-        
-        { x: 2,  y: 5  },
-        { x: 3,  y: 7  },
-        { x: 1,  y: 8  },
-        { x: 4,  y: 9  },
-        { x: 3,  y: 8  },
-        { x: 2,  y: 6  },
-        { x: 5,  y: 12 },
-        { x: 6,  y: 14 },
-        { x: 7,  y: 16 },
-        { x: 8,  y: 18 },
-        { x: 9,  y: 20 },
-        { x: 10, y: 23 },
-        { x: 11, y: 25 },
-        { x: 12, y: 28 },
-        { x: 13, y: 31 },
-        { x: 14, y: 34 },
-        { x: 15, y: 38 },
-        { x: 7,  y: 5  }
-],
-      // make the points big enough and in a contrasting color:
+      label: "Daily Cups vs Coding Hours",
+      data: scatterData,
       pointRadius: 3,
-      pointBorderColor: '#189AB4',
+      pointBorderColor: "#189AB4",
       pointBorderWidth: 1,
       showLine: false
     }]
@@ -205,27 +194,28 @@ new Chart(ctxScatter, {
     maintainAspectRatio: false,
     scales: {
       x: {
-        type: 'linear',
-        title: {
-          display: true,
-          text: 'Cups of Coffee'
-        },
+        type: "linear",
+        title: { display: true, text: "Cups of Coffee" },
         grid: { display: false }
       },
       y: {
-        type: 'linear',
-        title: {
-          display: true,
-          text: 'Coding Hours'
-        },
+        type: "linear",
+        title: { display: true, text: "Coding Hours" },
         grid: { display: false }
+      }
+    },
+    plugins: {
+      tooltip: {
+        callbacks: {
+          // Replace default "(x, y)" with your custom label
+          label(ctx) {
+            return ctx.raw.label;
+          }
+        }
       }
     }
   }
 });
-
-
-
 
     
 
