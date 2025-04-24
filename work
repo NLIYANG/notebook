@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" x-data="projectsData()">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Work | Liyang Ng</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Alpine.js -->
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <!-- Alpine data: list your projects here -->
+  <script>
+    function projectsData() {
+      return {
+        filter: '',            // bound to the search box
+        projects: [
+          // example project entry:
+          { 
+            id: 1,
+            title: 'Bible Olympics',
+            desc: 'Interactive Bible quiz and games.',
+            img: 'bibleolympics.jpg',
+            url: '#'
+          },
+          // ← add more like this:
+          // { id: 2, title: 'Project 2', desc: '...', img: 'project2.jpg', url: 'link-to-project' },
+        ],
+        showModal: false,      // controls modal visibility
+        currentProject: null,  // holds the project clicked
+        // returns only projects matching the filter text
+        filteredProjects() {
+          return this.projects.filter(p =>
+            p.title.toLowerCase().includes(this.filter.toLowerCase())
+          );
+        },
+        // open the modal & set the current project
+        openModal(proj) {
+          this.currentProject = proj;
+          this.showModal = true;
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="font-sans text-gray-900">
+
+  <!-- NAVIGATION -->
+  <nav class="fixed w-full bg-white bg-opacity-75 backdrop-blur z-20">
+    <div class="max-w-4xl mx-auto flex items-center justify-between p-4">
+      <a href="index.html" class="text-xl">
+        <span>Liyang </span><span class="font-bold">Ng</span>
+      </a>
+      <div class="space-x-6">
+        <a href="index.html#about" class="hover:text-blue-600">About</a>
+        <a href="work.html" class="font-bold text-blue-600">Work</a>
+        <a href="index.html#contact" class="hover:text-blue-600">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <header class="pt-24 pb-8 bg-gray-100">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="text-3xl sm:text-4xl font-bold">My Work</h1>
+      <p class="mt-2 text-gray-700">A selection of projects I’ve built</p>
+    </div>
+  </header>
+
+  <!-- FILTER & SEARCH -->
+  <section class="max-w-4xl mx-auto px-4 py-6">
+    <input
+      x-model="filter"
+      type="text"
+      placeholder="Search projects..."
+      class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+    />
+  </section>
+
+  <!-- PROJECT GRID -->
+  <section class="max-w-4xl mx-auto px-4 pb-12">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <template x-for="proj in filteredProjects()" :key="proj.id">
+        <div
+          @click="openModal(proj)"
+          class="cursor-pointer overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition"
+        >
+          <img
+            :src="proj.img"
+            alt=""
+            class="w-full h-40 object-cover"
+          />
+          <div class="p-4">
+            <h3 class="font-semibold" x-text="proj.title"></h3>
+            <p class="text-sm text-gray-600 mt-1" x-text="proj.desc"></p>
+          </div>
+        </div>
+      </template>
+    </div>
+  </section>
+
+  <!-- MODAL DETAIL VIEW -->
+  <div
+    x-show="showModal"
+    class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4"
+    x-cloak
+  >
+    <div
+      @click.away="showModal = false"
+      class="bg-white rounded-lg max-w-md w-full overflow-hidden"
+    >
+      <img
+        :src="currentProject.img"
+        alt=""
+        class="w-full h-48 object-cover"
+      />
+      <div class="p-4">
+        <h3 class="text-xl font-bold mb-2" x-text="currentProject.title"></h3>
+        <p class="text-gray-700 mb-4" x-text="currentProject.desc"></p>
+        <a
+          :href="currentProject.url"
+          target="_blank"
+          class="inline-block mb-4 font-medium underline text-blue-600"
+        >
+          View Project
+        </a>
+        <button
+          @click="showModal = false"
+          class="w-full py-2 bg-red-500 text-white rounded hover:bg-red-600"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-800 text-gray-400 py-6 text-center">
+    &copy; 2025 Liyang Ng. All rights reserved.
+  </footer>
+
+</body>
+</html>
