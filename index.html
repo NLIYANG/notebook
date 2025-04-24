@@ -69,7 +69,7 @@
     bg-center
 
     /* Fixed height that scrolls with the page */
-    h-[400px]        /* 400px tall on all screens by default */
+    h-[500px]        /* 400px tall on all screens by default */
     sm:h-[500px]     /* ≥640px: 500px tall */
     md:h-[600px]     /* ≥768px: 600px tall */
   "
@@ -87,9 +87,21 @@
     </div>
   </div>
 </header>
+  
+
+  <!-- ABOUT: Short bio with image -->
+  <section id="about" class="bg-gray-100 py-12">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-4">About Me</h2>
+      <img src="headshot.jpg" alt="Liyang Ng" class="w-32 h-32 mx-auto rounded-full mb-4 shadow" />
+      <p class="text-base sm:text-lg leading-relaxed">
+        I’m a passionate analyst and a huge advocate for learning. I love solving problems through data and design, both which are my strenghts. Based in Tampa, FL, I lead youth ministries, build dashboards, and prototype innovative web tools in my spare time.
+      </p>
+    </div>
+  </section>
 
 
-  <!-- PROJECTS: Filterable gallery with modal details -->
+<!-- PROJECTS: Filterable gallery with modal details -->
   <section id="work" x-data="projectsData()" class="pt-16 bg-white py-12">
     <div class="max-w-4xl mx-auto px-4">
       <h2 class="text-2xl sm:text-3xl font-bold mb-4">Selected Work</h2>
@@ -125,16 +137,10 @@
     </div>
   </section>
 
-  <!-- ABOUT: Short bio with image -->
-  <section id="about" class="bg-gray-100 py-12">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-      <h2 class="text-2xl sm:text-3xl font-bold mb-4">About Me</h2>
-      <img src="headshot.jpg" alt="Liyang Ng" class="w-32 h-32 mx-auto rounded-full mb-4 shadow" />
-      <p class="text-base sm:text-lg leading-relaxed">
-        I’m a passionate analyst and a huge advocate for learning. I love solving problems through data and design, both which are my strenghts. Based in Tampa, FL, I lead youth ministries, build dashboards, and prototype innovative web tools in my spare time.
-      </p>
-    </div>
-  </section>
+  
+
+
+  
 
 
 <!-- 2) Somewhere in your <body>, add a new “Hobbies” section -->
