@@ -21,16 +21,23 @@
 
   
   <!-- NAVIGATION -->
-  <nav class="fixed w-full bg-white bg-opacity-70 backdrop-blur-md z-10">
-    <div class="max-w-4xl mx-auto flex items-center justify-between p-4">
-      <a href="index.html" class="text-xl font-bold">Liyang Ng</a>
-      <div class="space-x-6">
-        <a href="index.html" class="hover:text-blue-600">Home</a>
-        <a href="work.html" class="hover:text-blue-600">Work</a>
-        <a href="#charts" class="hover:text-blue-600">Charts</a>
-      </div>
+ <nav x-data="{ open: false }" class="fixed w-full bg-white bg-opacity-70 backdrop-blur-md z-10">
+  <div class="max-w-4xl mx-auto flex items-center justify-between p-4">
+    <a href="index.html" class="text-xl">
+      <span class = font-normal">Liyang</span>
+      <span class="font-bold">Ng</span>
+    </a>
+    <button @click="open = !open" class="md:hidden focus:outline-none">
+      <!-- svg icon -->
+    </button>
+    <div class="md:flex space-x-6" :class="{ 'block': open, 'hidden': !open }">
+      <a href="work.html" class="hover:text-blue-600">Work</a>
+      <a href="visualme.html" class="hover:text-blue-600">Me in Charts</a>
+      <a href="index.html#about" class="hover:text-blue-600">About</a>
+      <a href="index.html#contact" class="hover:text-blue-600">Contact</a>
     </div>
-  </nav>
+  </div>
+</nav>
 
   <!-- MAIN CONTENT FORMATTING ONLY-->
   <main id="charts" class="pt-20 max-w-4xl mx-auto px-4 space-y-12">
