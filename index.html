@@ -87,57 +87,116 @@
     </div>
   </div>
 </header>
+
+
+
   
 
-  <!-- ABOUT: Short bio with image -->
-  <section id="about" class="bg-gray-100 py-12">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-      <h2 class="text-2xl sm:text-3xl font-bold mb-4">About Me</h2>
-      <img src="headshot.jpg" alt="Liyang Ng" class="w-32 h-32 mx-auto rounded-full mb-4 shadow" />
-      <p class="text-base sm:text-lg leading-relaxed">
-        I’m a passionate analyst and a huge advocate for learning. I love solving problems through data and design, both which are my strenghts. Based in Tampa, FL, I lead youth ministries, build dashboards, and prototype innovative web tools in my spare time.
-      </p>
-    </div>
-  </section>
 
-
-<!-- PROJECTS: Filterable gallery with modal details -->
-  <section id="work" x-data="projectsData()" class="pt-16 bg-white py-12">
-    <div class="max-w-4xl mx-auto px-4">
-      <h2 class="text-2xl sm:text-3xl font-bold mb-4">Selected Work</h2>
-      <!-- Search box -->
-      <input x-model="filter" type="text" placeholder="Search projects..."
-             class="w-full p-2 mb-6 border rounded" />
-      <!-- Grid of project cards -->
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <template x-for="proj in filteredProjects()" :key="proj.id">
-          <div @click="openModal(proj)"
-               class="cursor-pointer overflow-hidden rounded-lg shadow hover:shadow-lg transition">
-            <img :src="proj.img" alt="" class="w-full h-40 object-cover" />
-            <div class="p-4">
-              <h3 class="font-semibold" x-text="proj.title"></h3>
-              <p class="text-sm text-gray-600 mt-1" x-text="proj.desc"></p>
-            </div>
-          </div>
-        </template>
+   <section class="flex flex-col md:flex-row items-center gap-8">
+      <!-- Text -->
+      <div class="flex-1">
+        <h1 class="text-6xl font-extrabold text-pink-400 mb-4">hey there :)</h1>
+        <p class="text-2xl md:text-3xl font-medium mb-6">
+          my name is <span class="underline decoration-pink-400">Your Name</span><br/>
+          and i'm an aspiring marketing professional.
+        </p>
+        <!-- Call-to-action or link -->
+        <a href="#contact" class="inline-block bg-pink-400 text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-pink-300 transition">
+          Let’s Connect
+        </a>
       </div>
 
-      <!-- Modal for project details -->
-      <div x-show="showModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4" x-cloak>
-        <div @click.away="showModal = false" class="bg-white rounded-lg max-w-md w-full overflow-hidden">
-          <img :src="currentProject.img" alt="" class="w-full h-48 object-cover" />
-          <div class="p-4">
-            <h3 class="text-xl font-bold mb-2" x-text="currentProject.title"></h3>
-            <p class="text-gray-700 mb-4" x-text="currentProject.desc"></p>
-            <a :href="currentProject.url" target="_blank" class="text-blue-600 underline">View Project</a>
-            <button @click="showModal = false" class="block mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Close</button>
-          </div>
+      <!-- Photo -->
+      <div class="flex-1 flex justify-center">
+        <div class="relative rounded-full overflow-hidden w-64 h-64 md:w-80 md:h-80 ring-4 ring-pink-400">
+          <img src="your-photo.jpg" alt="Your Name" class="object-cover w-full h-full"/>
+          <!-- Optional doodles with absolute positioning -->
+          <div class="absolute top-2 left-2 text-pink-400 text-2xl">✨</div>
+          <div class="absolute bottom-4 right-4 text-pink-400 text-2xl">💖</div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- Fun Facts -->
+    <section>
+      <h2 class="text-4xl font-bold text-pink-400 mb-4">fun facts about me</h2>
+      <ul class="list-disc list-inside space-y-2 text-lg">
+        <li>🗺️ Born and raised in Rio de Janeiro, Brazil</li>
+        <li>🐬 Obsessed with dolphins</li>
+        <li>🐰 Used to have a bunny named “Hanna Montana”</li>
+        <li>🍰 Love cooking and baking for friends</li>
+        <li>♋ June Cancer & proud “mom” friend of the group</li>
+      </ul>
+    </section>
+
+    <!-- Skills -->
+    <section>
+      <h2 class="text-4xl font-bold text-pink-400 mb-4">skills & tools</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-lg">
+        <span class="inline-block bg-gray-800 px-3 py-1 rounded-full">Marketing Strategy</span>
+        <span class="inline-block bg-gray-800 px-3 py-1 rounded-full">Social Media</span>
+        <span class="inline-block bg-gray-800 px-3 py-1 rounded-full">Adobe Creative Suite</span>
+        <span class="inline-block bg-gray-800 px-3 py-1 rounded-full">Google Analytics</span>
+        <span class="inline-block bg-gray-800 px-3 py-1 rounded-full">Email Campaigns</span>
+        <span class="inline-block bg-gray-800 px-3 py-1 rounded-full">Content Writing</span>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section>
+      <h2 class="text-4xl font-bold text-pink-400 mb-4">experience</h2>
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-2xl font-semibold">Marketing Intern @ Acme Co.</h3>
+          <p class="text-gray-400 italic mb-1">Jun 2024 – Present</p>
+          <ul class="list-disc list-inside space-y-1">
+            <li>Designed social-media campaigns that increased engagement by 30%</li>
+            <li>Wrote and scheduled email newsletters to 10k+ subscribers</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-2xl font-semibold">Freelance Content Creator</h3>
+          <p class="text-gray-400 italic mb-1">2022 – Present</p>
+          <ul class="list-disc list-inside space-y-1">
+            <li>Produced blog articles on marketing trends (5k+ monthly views)</li>
+            <li>Developed branding materials for small business clients</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section>
+      <h2 class="text-4xl font-bold text-pink-400 mb-4">education</h2>
+      <div class="space-y-4 text-lg">
+        <p>
+          <span class="font-semibold">B.A. in Marketing</span>, University of Somewhere<br/>
+          <span class="text-gray-400 italic">Class of 2024</span>
+        </p>
+        <p>
+          <span class="font-semibold">Certified Digital Marketer</span>, Digital Academy<br/>
+          <span class="text-gray-400 italic">2023</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="text-center">
+      <h2 class="text-4xl font-bold text-pink-400 mb-4">get in touch</h2>
+      <p class="mb-6">Feel free to reach out for collaborations or just to say hi!</p>
+      <a href="mailto:you@example.com" class="inline-block bg-pink-400 text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-pink-300 transition">
+        Email Me
+      </a>
+    </section>
+
+
 
   
+
+
+
+
 
 
   
