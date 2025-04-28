@@ -43,15 +43,7 @@
   <main id="charts" class="pt-20 max-w-4xl mx-auto px-4 space-y-12">
     <h1 class="text-3xl sm:text-4xl font-bold">More about Me (In Charts)</h1>
 
-    <!-- 1) Weekly Activities Bar Chart -->
-    <section id="weekly-activities" class="bg-white p-6 rounded shadow">
-      <h2 class="text-2xl font-semibold mb-4">Weekly Activities (Hours per Week)</h2>
-      <div class="relative w-full h-64">
-        <canvas id="weeklyActivitiesChart" class="absolute inset-0 w-full h-full"></canvas>
-      </div>
-    </section>
-
-    <!-- 2) Skills Radar Chart -->
+    <!-- Skills Radar Chart -->
     <section id="skills-proficiency" class="bg-white p-6 rounded shadow">
       <h2 class="text-2xl font-semibold mb-4">Skill Proficiencies (1–10)</h2>
       <div class="relative w-full h-64">
@@ -59,14 +51,8 @@
       </div>
     </section>
 
-    <!-- 3) Milestones Timeline -->
-    <section id="milestones-timeline" class="bg-white p-6 rounded shadow">
-      <h2 class="text-2xl font-semibold mb-4">Milestones Timeline</h2>
-      <div id="milestonesTimeline" class="w-full h-64"></div>
-    </section>
-
-
-<!-- 2) Somewhere in your <body>, add a new “Hobbies” section -->
+   
+<!--HOBBIES SECTION -->
 <section id="hobbies" class="py-12 bg-white">
   <div class="max-w-4xl mx-auto px-4 text-center">
     <h2 class="text-2xl sm:text-3xl font-bold mb-6">My Hobbies</h2>
@@ -119,20 +105,6 @@
 </script>
 
 
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
     <!-- 5) Coffee vs Coding Scatter Plot -->
     <section id="coffee-coding" class="bg-white p-6 rounded shadow">
       <h2 class="text-2xl font-semibold mb-4">Coffee vs. Coding (cups vs hours)</h2>
@@ -149,9 +121,6 @@
     </section>
 
 
-
-    
-
     <!-- 6) Goals Progress Bars -->
     <section id="goals-progress" class="bg-white p-6 rounded shadow">
       <h2 class="text-2xl font-semibold mb-4">Goals Progress</h2>
@@ -162,7 +131,6 @@
   </h3>
 
 
-    
       <div id="goalsProgressContainer" class="space-y-4">
         <div>
           <p class="font-medium">Read 50 Books</p>
@@ -191,12 +159,6 @@
       </div>
     </section>
 
-    <!-- 7) Productivity Heatmap -->
-    <section id="productivity-heatmap" class="bg-white p-6 rounded shadow">
-      <h2 class="text-2xl font-semibold mb-4">Productivity Heatmap</h2>
-      <div id="productivityHeatmap" class="w-full h-64"></div>
-    </section>
-  </main>
 
   <!-- FOOTER -->
   <footer class="bg-gray-800 text-gray-400 py-4 text-center mt-12">
@@ -207,25 +169,6 @@
   
   <!-- SCRIPT: initialize charts with sample data CODEEE -->
   <script>
-    // 1) Weekly Activities Bar Chart
-    const ctxWeekly = document.getElementById('weeklyActivitiesChart').getContext('2d');
-    new Chart(ctxWeekly, {
-      type: 'bar',
-      data: {
-        labels: ['Coding', 'Reading', 'Running', 'Coffee Brewing', 'Music Practice'],
-        datasets: [{
-          label: 'Hours per Week',
-          data: [15, 5, 4, 7, 6],
-          backgroundColor: ['#3B82F6','#10B981','#F59E0B','#EF4444','#8B5CF6']
-        }]
-      },
-      options: { responsive: true, maintainAspectRatio: false }
-    });
-
-
-
-    
-
     // 2) Skills Radar Chart
     const ctxRadar = document.getElementById('skillsRadarChart').getContext('2d');
     new Chart(ctxRadar, {
@@ -303,8 +246,6 @@ new Chart(ctxScatter, {
 });
 
     
-
-    
     // 6) Goals Progress Bars - dynamic update
     (function(){
       const goals = [
@@ -328,55 +269,4 @@ new Chart(ctxScatter, {
 
 
 
-
-
-
-
-    
-    // 7) Productivity Heatmap (D3.js)
-    (function(){
-      const data = [];
-      // generate random productivity 0-10 for every hour (0-23) and day (0-6)
-      for(let day=0;day<7;day++){
-        for(let hour=0;hour<24;hour++){
-          data.push({day,hour,value:Math.floor(Math.random()*11)});
-        }
-      }
-      const cellSize = 16;
-      const svg = d3.select('#productivityHeatmap')
-        .append('svg')
-        .attr('width', cellSize*24 + 60)
-        .attr('height', cellSize*7 + 40);
-      const color = d3.scaleSequential(d3.interpolateBlues).domain([0,10]);
-      svg.selectAll('rect')
-        .data(data).enter()
-        .append('rect')
-        .attr('x', d=>d.hour*cellSize + 50)
-        .attr('y', d=>d.day*cellSize + 20)
-        .attr('width', cellSize)
-        .attr('height', cellSize)
-        .attr('fill', d=>color(d.value));
-      // axes labels
-      svg.selectAll('text.hour')
-        .data(d3.range(24)).enter()
-        .append('text')
-        .attr('class','hour')
-        .attr('x',(d,i)=>i*cellSize+50)
-        .attr('y',12)
-        .attr('text-anchor','middle')
-        .attr('font-size','8px')
-        .text(d=>d);
-      svg.selectAll('text.day')
-        .data(['Sun','Mon','Tue','Wed','Thu','Fri','Sat']).enter()
-        .append('text')
-        .attr('class','day')
-        .attr('x',10)
-        .attr('y',(d,i)=>i*cellSize+32)
-        .attr('text-anchor','end')
-        .attr('font-size','8px')
-        .text(d=>d);
-    })();
-  </script>
-</body>
-</html>
 
