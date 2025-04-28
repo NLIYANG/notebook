@@ -93,7 +93,7 @@
     <!-- Fun Facts -->
     <section class="max-w-4xl mx-auto flex flex-col md:flex-row items-start gap-8 mb-24 px-4">
       <h2 class="text-4xl font-bold text-amber-400 mb-6">fun facts about me</h2>
-     
+    
       <ul
     class="list-disc list-outside pl-6 space-y-3 text-lg
            text-left mx-auto max-w-md + mb-50"
@@ -205,61 +205,103 @@
     </div>
     </section>
 
-   
   
-<!-- 2) Somewhere in your <body>, add a new “Hobbies” section -->
-<section id="hobbies" class="py-12 bg-white">
-  <div class="max-w-4xl mx-auto px-4 text-center">
-    <h2 class="text-2xl sm:text-3xl font-bold mb-6">My Hobbies</h2>
-    <!-- Canvas for the chart -->
-    <canvas id="hobbiesChart" class="w-full h-64"></canvas>
+<section id="about-data" class="py-12 bg-white">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-3xl sm:text-4xl font-bold text-center mb-10">A Glimpse in Charts</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+      <!-- 1) Hobbies Hours per Week -->
+      <div class="bg-gray-50 rounded-lg p-6 shadow">
+        <h3 class="text-xl font-semibold mb-4 text-center">Hobbies (hrs/week)</h3>
+        <canvas id="hobbiesChart" class="w-full h-64"></canvas>
+      </div>
+
+      <!-- 2) Skill Proficiency -->
+      <div class="bg-gray-50 rounded-lg p-6 shadow">
+        <h3 class="text-xl font-semibold mb-4 text-center">Skill Proficiency (1–10)</h3>
+        <canvas id="skillsChart" class="w-full h-64"></canvas>
+      </div>
+
+      <!-- 3) Weekly Productivity -->
+      <div class="bg-gray-50 rounded-lg p-6 shadow">
+        <h3 class="text-xl font-semibold mb-4 text-center">Weekly Productivity</h3>
+        <canvas id="productivityChart" class="w-full h-64"></canvas>
+      </div>
+
+      <!-- 4) Tech Stack Usage -->
+      <div class="bg-gray-50 rounded-lg p-6 shadow">
+        <h3 class="text-xl font-semibold mb-4 text-center">Tech Stack (%)</h3>
+        <canvas id="techChart" class="w-full h-64"></canvas>
+      </div>
+
+    </div>
   </div>
 </section>
 
-<!-- 3) Right before </body>, initialize the chart -->
 <script>
-  const ctx = document.getElementById('hobbiesChart').getContext('2d');
-  new Chart(ctx, {
-    type: 'bar',                          // try 'radar' for a spider-web look
-    data: {
-      labels: ['Guitar', 'Coffee', 'Running', 'Coding', 'Reading'],
-      datasets: [{
-        label: 'Hours per Week',
-        data: [10, 7, 3, 12, 4],           // tweak these values to your real habits
-        backgroundColor: [
-          'rgba(255, 159, 64, 0.6)',
-          'rgba(75, 192, 192, 0.6)',
-          'rgba(153, 102, 255, 0.6)',
-          'rgba(54, 162, 235, 0.6)',
-          'rgba(255, 99, 132, 0.6)'
-        ],
-        borderColor: [
-          'rgba(255, 159, 64, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 99, 132, 1)'
-        ],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: true,         // lets the h-64 class dictate height
-      scales: {
-        y: {
-          beginAtZero: true,
-          ticks: { stepSize: 2 }
-        }
-      },
-      plugins: {
-        legend: { display: false }
-      }
-    }
-  });
+// 1) Hobbies Bar Chart
+new Chart(document.getElementById('hobbiesChart').getContext('2d'), {
+  type: 'bar',
+  data: {
+    labels: ['Guitar','Coffee','Running','Coding','Reading'],
+    datasets:[{ data:[10,7,3,12,4], backgroundColor:'rgba(54,162,235,0.6)' }]
+  },
+  options:{ responsive:true, maintainAspectRatio:true, scales:{ y:{ beginAtZero:true, ticks:{ stepSize:2 } }}, plugins:{ legend:{display:false} } }
+});
+
+// 2) Skills Radar Chart
+new Chart(document.getElementById('skillsChart').getContext('2d'), {
+  type: 'radar',
+  data: {
+    labels: ['SQL','Python','Power BI','DAX','Communication'],
+    datasets:[{
+      label:'Proficiency',
+      data:[9,8,8,7,9],
+      backgroundColor:'rgba(255,159,64,0.4)',
+      borderColor:'rgba(255,159,64,1)',
+      borderWidth:2,
+      pointBackgroundColor:'rgba(255,159,64,1)'
+    }]
+  },
+  options:{ responsive:true, maintainAspectRatio:true, scales:{ r:{ beginAtZero:true, max:10, ticks:{ stepSize:2 } } }, plugins:{ legend:{ position:'top' } } }
+});
+
+// 3) Weekly Productivity Line Chart
+new Chart(document.getElementById('productivityChart').getContext('2d'), {
+  type: 'line',
+  data: {
+    labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+    datasets:[{
+      label:'Tasks Completed',
+      data:[5,8,6,9,7,3,2],
+      borderWidth:2,
+      fill:false
+    }]
+  },
+  options:{ responsive:true, maintainAspectRatio:true, scales:{ y:{ beginAtZero:true }}, plugins:{ legend:{display:false} } }
+});
+
+// 4) Tech Stack Usage Pie Chart
+new Chart(document.getElementById('techChart').getContext('2d'), {
+  type: 'pie',
+  data: {
+    labels:['JavaScript','Python','SQL','R','Other'],
+    datasets:[{
+      data:[30,25,20,15,10],
+      backgroundColor:[
+        'rgba(54,162,235,0.6)',
+        'rgba(255,99,132,0.6)',
+        'rgba(255,206,86,0.6)',
+        'rgba(75,192,192,0.6)',
+        'rgba(153,102,255,0.6)'
+      ]
+    }]
+  },
+  options:{ responsive:true, maintainAspectRatio:true, plugins:{ legend:{ position:'right' } } }
+});
 </script>
-
-
 
  <!-- Contact -->
     <section id="contact" class="text-center">
