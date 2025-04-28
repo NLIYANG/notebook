@@ -277,7 +277,7 @@ new Chart(document.getElementById('productivityChart').getContext('2d'), {
       label:'Tasks Completed',
       data:[5,8,6,9,7,3,2],
       borderWidth:2,
-      fill:true.
+      fill:true,
       borderColor: 'rgba(75, 192, 75, 1)',       // green line
       backgroundColor: 'rgba(75, 192, 75, 0.4)
     }]
@@ -285,8 +285,6 @@ new Chart(document.getElementById('productivityChart').getContext('2d'), {
   options:{ responsive:true, maintainAspectRatio:true, scales:{ y:{ beginAtZero:true }}, plugins:{ legend:{display:false} } }
 });
 
-
-  
 
 // 4) COFFEE CHART
 const ctxScatter = document
