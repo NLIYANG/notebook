@@ -1,150 +1,95 @@
 <!DOCTYPE html>
-<html lang="en" x-data="projectsData()">
+<html lang="en" x-data="workPageData()">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Work | Liyang Ng</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Work Page</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Alpine.js -->
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
-  <!-- Alpine data: list your projects here -->
-  <script>
-    function projectsData() {
-      return {
-        filter: '',            // bound to the search box
-        projects: [
-          // example project entry:
-          { 
-            id: 1,
-            title: 'Bible Olympics',
-            desc: 'Interactive Bible quiz and games.',
-            img: 'bibleolympics.jpg',
-            url: '#'
-          },
-          // ← add more like this:
-          // { id: 2, title: 'Project 2', desc: '...', img: 'project2.jpg', url: 'link-to-project' },
-        ],
-        showModal: false,      // controls modal visibility
-        currentProject: null,  // holds the project clicked
-        // returns only projects matching the filter text
-        filteredProjects() {
-          return this.projects.filter(p =>
-            p.title.toLowerCase().includes(this.filter.toLowerCase())
-          );
-        },
-        // open the modal & set the current project
-        openModal(proj) {
-          this.currentProject = proj;
-          this.showModal = true;
-        }
-      }
-    }
-  </script>
+  <style>
+    /* Optional: smooth content appearance */
+    [x-cloak] { display: none; }
+  </style>
 </head>
-
-<body class="font-sans text-gray-900">
-
-  <!-- NAVIGATION -->
-  <nav x-data="{ open: false }" class="fixed w-full bg-white bg-opacity-70 backdrop-blur-md z-10">
-  <div class="max-w-4xl mx-auto flex items-center justify-between p-4">
-    <a href="index.html" class="text-xl">
-      <span class = font-normal">Liyang</span>
-      <span class="font-bold">Ng</span>
-    </a>
-    <button @click="open = !open" class="md:hidden focus:outline-none">
-      <!-- svg icon -->
-    </button>
-    <div class="md:flex space-x-6" :class="{ 'block': open, 'hidden': !open }">
-      <a href="work.html" class="hover:text-blue-600">Work</a>
-      <a href="visualme.html" class="hover:text-blue-600">Me in Charts</a>
-      <a href="index.html#about" class="hover:text-blue-600">About</a>
-      <a href="index.html#contact" class="hover:text-blue-600">Contact</a>
-    </div>
-  </div>
-</nav>
-
-  <!-- HERO SECTION -->
-  <header class="pt-24 pb-8 bg-gray-100">
-    <div class="max-w-4xl mx-auto text-center">
-      <h1 class="text-3xl sm:text-4xl font-bold">My Work</h1>
-      <p class="mt-2 text-gray-700">A selection of projects I’ve built</p>
+<body class="bg-gray-100 font-sans text-gray-900">
+  <header class="bg-white shadow py-6">
+    <div class="max-w-4xl mx-auto px-4">
+      <h1 class="text-3xl font-bold">My Professional Journey</h1>
+      <p class="mt-2 text-gray-600">Overview of my experiences, achievements, and statistics.</p>
     </div>
   </header>
 
-  <!-- FILTER & SEARCH -->
-  <section class="max-w-4xl mx-auto px-4 py-6">
-    <input
-      x-model="filter"
-      type="text"
-      placeholder="Search projects..."
-      class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
-    />
-  </section>
-
-  <!-- PROJECT GRID -->
-  <section class="max-w-4xl mx-auto px-4 pb-12">
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      <template x-for="proj in filteredProjects()" :key="proj.id">
-        <div
-          @click="openModal(proj)"
-          class="cursor-pointer overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition"
-        >
-          <img
-            :src="proj.img"
-            alt=""
-            class="w-full h-40 object-cover"
-          />
-          <div class="p-4">
-            <h3 class="font-semibold" x-text="proj.title"></h3>
-            <p class="text-sm text-gray-600 mt-1" x-text="proj.desc"></p>
-          </div>
+  <main class="max-w-4xl mx-auto px-4 py-8" x-cloak>
+    <!-- Sections rendered dynamically -->
+    <template x-for="section in sections" :key="section.id">
+      <section class="mb-8 bg-white p-6 rounded-lg shadow">
+        <h2 class="text-2xl font-semibold mb-4" x-text="section.title"></h2>
+        <p class="text-gray-700 mb-4" x-text="section.content"></p>
+        <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+          <template x-for="(value, label) in section.stats" :key="label">
+            <div class="bg-gray-50 p-4 rounded">
+              <p class="text-xl font-bold" x-text="value"></p>
+              <p class="text-gray-600" x-text="label"></p>
+            </div>
+          </template>
         </div>
-      </template>
-    </div>
-  </section>
+      </section>
+    </template>
+  </main>
 
-  <!-- MODAL DETAIL VIEW -->
-  <div
-    x-show="showModal"
-    class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4"
-    x-cloak
-  >
-    <div
-      @click.away="showModal = false"
-      class="bg-white rounded-lg max-w-md w-full overflow-hidden"
-    >
-      <img
-        :src="currentProject.img"
-        alt=""
-        class="w-full h-48 object-cover"
-      />
-      <div class="p-4">
-        <h3 class="text-xl font-bold mb-2" x-text="currentProject.title"></h3>
-        <p class="text-gray-700 mb-4" x-text="currentProject.desc"></p>
-        <a
-          :href="currentProject.url"
-          target="_blank"
-          class="inline-block mb-4 font-medium underline text-blue-600"
-        >
-          View Project
-        </a>
-        <button
-          @click="showModal = false"
-          class="w-full py-2 bg-red-500 text-white rounded hover:bg-red-600"
-        >
-          Close
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- FOOTER -->
-  <footer class="bg-gray-800 text-gray-400 py-6 text-center">
-    &copy; 2025 Liyang Ng. All rights reserved.
-  </footer>
-
+  <script>
+    function workPageData() {
+      return {
+        sections: [
+          {
+            id: 1,
+            title: 'Professional Experience',
+            content: 'Describe your roles, responsibilities, and key learnings in each position you've held.',
+            stats: {
+              'Years in Industry': '5+',
+              'Companies Worked': '3',
+              'Projects Led': '12',
+              'Teams Managed': '2'
+            }
+          },
+          {
+            id: 2,
+            title: 'Key Achievements',
+            content: 'Highlight awards, recognitions, and major milestones you've reached.',
+            stats: {
+              'Awards': '4',
+              'Certifications': '5',
+              'Publications': '2',
+              'Patents': '1'
+            }
+          },
+          {
+            id: 3,
+            title: 'Core Skills',
+            content: 'Showcase your primary skills and competencies.',
+            stats: {
+              'JavaScript': 'Expert',
+              'Python': 'Advanced',
+              'Data Analysis': 'Expert',
+              'UI/UX Design': 'Intermediate'
+            }
+          },
+          {
+            id: 4,
+            title: 'Education & Training',
+            content: 'Outline your educational background and professional training.',
+            stats: {
+              'Degrees': '2',
+              'Workshops': '8',
+              'Online Courses': '15',
+              'Conferences': '6'
+            }
+          }
+        ]
+      }
+    }
+  </script>
 </body>
 </html>
