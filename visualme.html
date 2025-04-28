@@ -65,11 +65,72 @@
       <div id="milestonesTimeline" class="w-full h-64"></div>
     </section>
 
-    <!-- 4) Places Map -->
-    <section id="places-map" class="bg-white p-6 rounded shadow">
-      <h2 class="text-2xl font-semibold mb-4">Places I've Been</h2>
-      <div id="placesMap" class="w-full h-64"></div>
-    </section>
+
+<!-- 2) Somewhere in your <body>, add a new “Hobbies” section -->
+<section id="hobbies" class="py-12 bg-white">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <h2 class="text-2xl sm:text-3xl font-bold mb-6">My Hobbies</h2>
+    <!-- Canvas for the chart -->
+    <canvas id="hobbiesChart" class="w-full h-64"></canvas>
+  </div>
+</section>
+
+<!-- 3) Right before </body>, initialize the chart -->
+<script>
+  const ctx = document.getElementById('hobbiesChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',                          // try 'radar' for a spider-web look
+    data: {
+      labels: ['Guitar', 'Coffee', 'Running', 'Coding', 'Reading'],
+      datasets: [{
+        label: 'Hours per Week',
+        data: [10, 7, 3, 12, 4],           // tweak these values to your real habits
+        backgroundColor: [
+          'rgba(255, 159, 64, 0.6)',
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(153, 102, 255, 0.6)',
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(255, 99, 132, 0.6)'
+        ],
+        borderColor: [
+          'rgba(255, 159, 64, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 99, 132, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,         // lets the h-64 class dictate height
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { stepSize: 2 }
+        }
+      },
+      plugins: {
+        legend: { display: false }
+      }
+    }
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
 
     <!-- 5) Coffee vs Coding Scatter Plot -->
