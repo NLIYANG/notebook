@@ -12,29 +12,7 @@
   <!-- Alpine.js for interactivity -->
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-  <!-- Alpine component for Projects -->
-  <script>
-    function projectsData() {
-      return {
-        filter: '',
-        projects: [
-          { id: 1, title: 'Bible Olympics', desc: 'Interactive Bible quiz and games.', img: 'bibleolympics.jpg', url: '#' },
-          { id: 2, title: 'Quiz App', desc: 'A fun quiz built with JS & HTML.', img: 'bibleolympics.jpg', url: '#' },
-          { id: 3, title: 'Forecast Dashboard', desc: 'Power BI dashboard for inventory.', img: 'bibleolympics.jpg', url: '#' }
-        ],
-        showModal: false,
-        currentProject: null,A
-        filteredProjects() {
-          return this.projects.filter(p => p.title.toLowerCase().includes(this.filter.toLowerCase()));
-        },
-        openModal(project) {
-          this.currentProject = project;
-          this.showModal = true;
-        }
-      }
-    }
-  </script>
-</head>
+ 
 <body class="font-garamond text-gray-900 text-center" >
 
 
@@ -90,7 +68,7 @@
 
 
 <!-- ABOUT ME SECTION -->
-<main class="max-w-4xl mx-auto p-6 space-y-16">
+<main class="max-w-4xl mx-auto p-6 space-y-25">
    <section class="flex flex-col md:flex-row items-center gap-8">
       <!-- Text -->
       <div class="flex-1">
