@@ -1,525 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- 1) In your <head>, include Chart.js via CDN (LOAD PACKAGES)-->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Liyang Ng | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Liyang Ng | Bubble Hover Demo</title>
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Alpine.js for interactivity -->
-  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
-
+  <!-- Tailwind CSS (for quick styling) -->
+  <script src="https://cdn.tailwindcss.com" defer></script>
   <!-- tsParticles core -->
-<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.min.js" defer></script>
 </head>
 
-  
-  <body class="font-garamond text-gray-900 text-center" >
+<body class="relative overflow-hidden bg-gray-900 text-white">
 
-<div id="tsparticles" class="fixed inset-0 z-[-10]"></div>
+  <!-- 1) Particle layer: fills the screen -->
+  <div id="tsparticles" class="absolute inset-0"></div>
 
-  
-<!-- NAVIGATION -->
-<nav class="fixed inset-x-0 top-0 bg-white bg-opacity-70 backdrop-blur-md z-10">
-  <div class="max-w-4xl mx-auto px-4 flex items-center justify-between h-16">
-    <!-- logo -->
-    <a href="index.html" class="text-xl flex-shrink-0">
-      <span class="font-normal">Liyang</span>
-      <span class="font-bold">Ng</span>
-    </a>
-</nav>
+  <!-- 2) Your page content goes here, stacked above the particles -->
+  <div class="relative z-10 flex flex-col min-h-screen">
 
-      
-  
-  <!-- HERO: Full-screen intro with background image -->
-<header
-  id="hero"
-  class="
-    w-full
-    bg-cover
-    bg-center
-  h-screen
-  mb-8
-  "
-  style="background-image:url('heronew.jpg')"
->
-  <!-- Semi-transparent overlay to boost contrast -->
-  <div class="bg-black bg-opacity-50 w-full h-full flex items-center justify-center">
-    <div class="text-center text-white px-4">
-      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-10">
-        Welcome to my <span class="text-amber-400">Portfolio</span>
-      </h1>
-   <p class="mt-2 text-lg italic">
-  A fully interactive portfolio built with modern JavaScript, Tailwind CSS, and Alpine.js.
-</p>
-    </div>
-  </div>
-</header>
+    <!-- NAVIGATION -->
+    <nav class="bg-black bg-opacity-50 p-4">
+      <div class="max-w-4xl mx-auto flex items-center justify-between">
+        <span class="text-xl font-mono">&lt;/&gt;</span>
+        <a href="#" class="text-lg font-semibold">Liyang Ng</a>
+      </div>
+    </nav>
 
-  
-<!-- ABOUT ME SECTION -->
-<main class="w-full p-6 space-y-16">
+    <!-- HERO -->
+    <header class="flex-grow flex items-center justify-center">
+      <h1 class="text-5xl font-bold">Bubble Hover Effect</h1>
+    </header>
 
-<section class="bg-white bg-opacity-80 max-w-4xl mx-auto flex flex-col md:flex-row items-start gap-8 mb-24 px-4">
-  <!-- Text Block -->
-  <div class="flex-1 text-left pl-2 md:pl-0">
-    <h1 class="text-5xl sm:text-6xl font-bold text-gray-800 mb-10">
-      Hello, I’m 
-      <span class="text-amber-400 border-b-4 border-amber-400 pb-1">
-        Liyang Ng
-      </span>
-    </h1>
-    <p class="text-2xl md:text-3xl font-light mb-6">
-      I am a 25-year-old data analyst passionate about all things data.
-    </p>
-    <a href="#contact" class="inline-block bg-amber-400 text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-pink-300 transition">
-      Let’s Chat!
-    </a>
+    <!-- FOOTER -->
+    <footer class="bg-black bg-opacity-50 p-4 text-center">
+      &copy; 2025 Liyang Ng
+    </footer>
   </div>
 
-  <!-- Headshot -->
-  <div class="flex-1 flex justify-center">
-    <div class="relative rounded-full overflow-hidden w-64 h-64 md:w-80 md:h-80 ring-4 ring-[#ffeac0]">
-      <img src="headshot.jpg" alt="Liyang Ng" class="object-cover w-full h-full"/>
-    </div>
-  </div>
-</section>
-
-
-
-
-
-
-
-  
-    <!-- Fun Facts -->
-    <section class="max-w-4xl mx-auto flex flex-col md:flex-row items-start gap-8 mb-24 px-4">
-     <h2 class="text-4xl font-bold text-amber-400 mb-6">
-  <span class="text-amber-800">fun facts</span> about me</h2>
-    
-      <ul
-    class="list-disc list-outside pl-6 space-y-3 text-lg
-           text-left mx-auto max-w-md + mb-50"
-  >
-  <li>🌴 Proudly raised in Penang, Malaysia</li>
-  <li>🗺️ I’ve traveled to 10 countries, from Vietnam to Vancouver</li>
-  <li>🙌 Serving as a youth pastor at my local church</li>
-  <li>🍸 Obsessed with crafting inventive cocktails</li>
-  <li>🌐 Fluent in three languages (English, Malay, and Mandarin)</li>
-      </ul>
-    </section>
-
-
-  
-  
-    <!-- Skills -->
-    <section id="skills-tools" class="max-w-4xl mx-auto p-6 space-y-16">
-    <h2 class="text-4xl font-bold text-amber-500 mb-8">Skills &amp; Tools</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      
-      <div class="bg-white border border-gray-200 px-6 py-4 rounded-lg shadow-md hover:shadow-lg transition">
-        <span class="text-xl font-medium">Marketing Strategy</span>
-      </div>
-      <div class="bg-white border border-gray-200 px-6 py-4 rounded-lg shadow-md hover:shadow-lg transition">
-        <span class="text-xl font-medium">Demand Planning and Forecasting</span>
-      </div>
-      <div class="bg-white border border-gray-200 px-6 py-4 rounded-lg shadow-md hover:shadow-lg transition">
-        <span class="text-xl font-medium">ML-Based Prediction Models (Python/R)</span>
-      </div>
-      <div class="bg-white border border-gray-200 px-6 py-4 rounded-lg shadow-md hover:shadow-lg transition">
-        <span class="text-xl font-medium">Data Visualization (Power BI)</span>
-      </div>
-      <div class="bg-white border border-gray-200 px-6 py-4 rounded-lg shadow-md hover:shadow-lg transition">
-        <span class="text-xl font-medium">Supply Chain Planning</span>
-      </div>
-      <div class="bg-white border border-gray-200 px-6 py-4 rounded-lg shadow-md hover:shadow-lg transition">
-        <span class="text-xl font-medium">Content Writing</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-   <!-- Experience -->
-<section class="bg-gray-100 rounded-lg p-6">
-  <h2 class="text-4xl font-bold text-amber-400 mb-6">Experience</h2>
-
-  <div class="space-y-10">
-  
-    <div>
-      <h3 class="text-2xl font-semibold mb-2">
-        Sr. Supply Chain Analyst @ Signode Industrial Group
-      </h3>
-      <p class="text-gray-400 italic mb-4">Jun 2024 – Present</p>
-      <ul class="list-none pl-0 space-y-2 text-lg">
-        <li>Collaborate with senior leadership to spearhead planning strategies, driving sales volume to consistently meet and exceed annual targets</li>
-        <li>Utilize historical data and key trends to generate forecasts, contributing to the development of accurate and data-driven annual budgets</li>
-        <li>Leveraged Microsoft Power BI and SQL to analyze 3,000+ customer locations and enhance revenue forecasting for a $136M ARR business</li>
-        <li>Championed demand forecasting initiatives using RStudio and Microsoft Power BI, resulting in a 30% reduction in stockouts and 20% improvement in forecast accuracy</li>
-      </ul>
-    </div>
-  
-    <div>
-      <h3 class="text-2xl font-semibold mb-2">
-        President (Data & Analytics Initiative) @ USF CSCMP
-      </h3>
-      <p class="text-gray-400 italic mb-4">2021 – 2023</p>
-      <ul class=" space-y-2 text-lg">
-        <li>Led data-driven mentorship matching, increasing internship placements by 25% through analysis of student preference data</li>
-        <li>Built predictive models to forecast student engagement, driving a 49% increase in participation among students and faculty</li>
-        <li>Spearheaded data-driven partnerships, expanding industry collaborations from 6 to 13 partners to enhance market reach</li>
-      </ul>
-    </div>
-  
-    <div>
-      <h3 class="text-2xl font-semibold mb-2">Corporate Marketing Associate @ Kobie Marketing</h3>
-      <p class="text-gray-400 italic mb-4">April 2021-December 2021</p>
-      <ul class="space-y-2 text-lg">
-        <li>Worked closely with the Business Development Team to develop go-to-market strategies for B2B and CPG Fortune 100 companies</li>
-        <li>Navigated complex cloud ecosystems to analyze emerging trends, identifying competitive advantages to increase prospecting list </li>
-       <li> Developed presentations for stakeholders and senior management, effectively communicating insights and recommendations derived from case study analysis</li>
-      </ul>
-    </div>
-  
-  </div>
-</section>
-
-
-    <!-- Education -->
-<section id="education" class="py-12 bg-white">
-  <div class="max-w-4xl mx-auto px-4 flex flex-col md:flex-row items-start gap-8">
-
-    <!-- Images Column -->
-    <div class="flex-shrink-0 space-y-4">
-      <img src="CPF.jpg" alt="University of the Cumberlands" class="w-56 h-56 object-cover rounded-lg shadow-md" />
-      <img src="USF.jpg" alt="University of South Florida" class="w-56 h-56 object-cover rounded-lg shadow-md" />
-    </div>
-
-    <!-- Text Column -->
-    <div class="flex-1">
-      <h2 class="text-4xl font-bold text-orange-400 mb-4">Education</h2>
-      <div class="space-y-4 text-lg">
-         <p>
-          <span class="font-semibold">Certified Professional Forecaster</span>, Institute of Business Forecasting and Demand Planning<br/>
-          <span class="text-gray-400 italic">2024</span>
-        </p>
-        <p>
-          <span class="font-semibold">M.S. in Data Science</span>, University of the Cumberlands<br/>
-          <span class="text-gray-400 italic">Class of 2023</span>
-        </p>
-        <p>
-          <span class="font-semibold">B.S. in Marketing and Supply Chain</span>, University of South Florida<br/>
-          <span class="text-gray-400 italic">Class of 2021</span>
-        </p>
-      </div>
-      <div class="mt-10">
-        <a href="Liyang Ng Resume.pdf" download class="inline-block bg-amber-900 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-amber-700 transition">
-          📄 Download My Resume
-        </a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- DATA ME -->
-<section id="about-data" class="py-12 bg-white">
-  <div class="max-w-6xl mx-auto px-4">
-    <h2 class="text-3xl sm:text-4xl font-bold text-center mb-10">A Glimpse of Me in Charts</h2>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-      <!-- 1) Hobbies Hours per Week -->
-      <div class="bg-gray-50 rounded-lg p-6 shadow">
-        <h3 class="text-xl font-semibold mb-4 text-center">Hobbies (hrs/week)</h3>
-        <canvas id="hobbiesChart" class="w-full h-64"></canvas>
-      </div>
-
-      <!-- 2) Skill Proficiency -->
-      <div class="bg-gray-50 rounded-lg p-6 shadow">
-        <h3 class="text-xl font-semibold mb-4 text-center">Skill Proficiency (1–10)</h3>
-        <canvas id="skillsChart" class="w-full h-64"></canvas>
-      </div>
-
-      <!-- 3) Weekly Productivity -->
-      <div class="bg-gray-50 rounded-lg p-6 shadow">
-        <h3 class="text-xl font-semibold mb-4 text-center">Weekly Productivity</h3>
-        <canvas id="productivityChart" class="w-full h-64"></canvas>
-      </div>
-
-      <!-- 4) Tech Stack Usage -->
-      <div class="bg-gray-50 rounded-lg p-6 shadow">
-        <h3 class="text-xl font-semibold mb-4 text-center">Coffee vs Coding</h3>
-        <canvas id="coffeeCodingChart" class="w-full h-64"></canvas>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-  
-<script defer>
-// 1) Hobbies Bar Chart
-new Chart(document.getElementById('hobbiesChart').getContext('2d'), {
-  type: 'bar',
-  data: {
-    labels: ['Guitar','Coffee','Running','Coding','Reading'],
-    datasets:[{ data:[10,7,3,12,4], backgroundColor:'rgba(54,162,235,0.6)' }]
-  },
-  options:{ responsive:true, maintainAspectRatio:true, scales:{ y:{ beginAtZero:true, ticks:{ stepSize:2 } }}, plugins:{ legend:{display:false} } }
-});
-
-// 2) Skills Radar Chart
-const ctxSkills = document
-  .getElementById('skillsChart')
-  .getContext('2d');
-
-new Chart(ctxSkills, {
-  type: 'radar',
-  data: {
-    // 8 skill axes
-    labels: [
-      'Python',
-      'R',
-      'JavaScript',
-      'Power BI (DAX)',
-      'Leadership',
-      'Supply Chain',
-      'Marketing Strategy',
-      'Presentation Skills'
-    ],
-    datasets: [
-      {
-        label: 'Proficiency',
-        data: [6, 9, 5, 9, 10, 9, 6, 8],
-        backgroundColor: 'rgba(255,159,64,0.4)',
-        borderColor: 'rgba(255,159,64,1)',
-        borderWidth: 2,
-        pointBackgroundColor: 'rgba(255,159,64,1)'
-      },
-      {
-        label: 'Interest Level',
-        data: [9, 7, 10, 5, 6, 6, 7, 8],
-        backgroundColor: 'rgba(54,162,235,0.3)',
-        borderColor: 'rgba(54,162,235,1)',
-        borderWidth: 2,
-        pointBackgroundColor: 'rgba(54,162,235,1)'
-      },
-      {
-        label: 'Projects Completed',
-        data: [9, 9, 6, 7, 9, 9, 6, 7],
-        backgroundColor: 'rgba(75,192,192,0.3)',
-        borderColor: 'rgba(75,192,192,1)',
-        borderWidth: 2,
-        pointBackgroundColor: 'rgba(75,192,192,1)'
-      }
-    ]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: true,
-    scales: {
-      r: {
-        beginAtZero: true,
-        max: 10,
-        ticks: {
-          stepSize: 2
+  <!-- 3) Initialize tsParticles with bubble-on-hover -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      tsParticles.load("tsparticles", {
+        fpsLimit: 60,
+        detectRetina: true,
+        background: { color: "transparent" },
+        particles: {
+          number: { value: 80, density: { enable: true, area: 800 } },
+          color: { value: "#ffffff" },
+          shape: { type: "circle" },
+          opacity: {
+            value: 0.3,
+            random: { enable: true, minimumValue: 0.1 },
+            anim: { enable: true, speed: 1, minimumValue: 0.1, sync: false }
+          },
+          size: {
+            value: 8,
+            random: { enable: true, minimumValue: 4 },
+            anim: { enable: true, speed: 4, minimumValue: 2, sync: false }
+          },
+          move: {
+            enable: true,
+            speed: 0.5,
+            direction: "none",
+            outModes: { default: "out" }
+          },
+          links: { enable: false }
         },
-        pointLabels: {
-          font: {
-            size: 14
+        interactivity: {
+          detectsOn: "canvas",
+          events: {
+            onHover: { enable: true, mode: "bubble" },
+            onClick: { enable: false },
+            resize: true
+          },
+          modes: {
+            bubble: {
+              distance: 150,
+              size: 20,
+              duration: 2,
+              opacity: 1
+            }
           }
         }
-      }
-    },
-    plugins: {
-      legend: {
-        position: 'top'
-      },
-      tooltip: {
-        callbacks: {
-          label: ({ dataset, raw }) => {
-            return `${dataset.label}: ${raw}`;
-          }
-        }
-      }
-    }
-  }
-});
-
-
-
-  
-
-// 3) Weekly Productivity Line Chart
-new Chart(document.getElementById('productivityChart').getContext('2d'), {
-  type: 'line',
-  data: {
-    labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
-    datasets:[{
-      label:'Tasks Completed',
-      data:[5,8,6,9,7,3,2],
-      borderWidth:2,
-      fill:true,
-      borderColor: 'rgba(75, 192, 75, 1)',       // green line
-      backgroundColor: 'rgba(75, 192, 75, 0.4)'
-    }]
-  },
-  options:{ responsive:true, maintainAspectRatio:true, scales:{ y:{ beginAtZero:true }}, plugins:{ legend:{display:false} } }
-});
-
-
-// 4) COFFEE CHART
-const ctxScatter = document
-  .getElementById("coffeeCodingChart")
-  .getContext("2d");
-
-// <-- your data array, each point now has a `label` property -->
-const scatterData = [
-  // your original points
-  { x: 2,  y: 5,  label: "Coded 5 hours, drank 2 cups of coffee" },
-  { x: 3,  y: 7,  label: "Coded 7 hours, drank 3 cups of coffee" },
-  { x: 1,  y: 8,  label: "Coded 8 hours, drank 1 cup of coffee" },
-  { x: 4,  y: 9,  label: "Coded 9 hours, drank 4 cups of coffee" },
-  { x: 3,  y: 8,  label: "Coded 8 hours, drank 3 cups of coffee" },
-  { x: 2,  y: 6,  label: "Coded 6 hours, drank 2 cups of coffee" },
-  { x: 5,  y: 12, label: "Coded 12 hours, drank 5 cups of coffee" },
-  { x: 6,  y: 14, label: "Coded 14 hours, drank 6 cups of coffee" },
-  { x: 6,  y: 6,  label: "Coded 6 hours, drank 6 cups – jittery but alive" },
-  { x: 5,  y: 10, label: "Coded 10 hours, drank 5 cups – lunchtime shuffle" },
-  { x: 4,  y: 8,  label: "Coded 8 hours, drank 4 cups – steady grind" },
-  { x: 7,  y: 16, label: "Coded 16 hours, drank 7 cups – survived on caffeine" },
-  { x: 8,  y: 18, label: "Coded 18 hours, drank 8 cups – nearing collapse" },
-  { x: 9,  y: 20, label: "Coded 20 hours, drank 9 cups – hallucinations set in" },
-  { x: 10, y: 22, label: "Coded 22 hours, drank 10 cups – coffee IV drip" },
-  { x: 11, y: 24, label: "Coded 24 hours, drank 11 cups – all-nighter champion" },
-  { x: 4,  y: 2,  label: "Coded 2 hours, drank 4 cups – morning rush" },
-  { x: 1,  y: 1,  label: "Coded 1 hour, drank 1 cup – easy start" },
-  { x: 5,  y: 14, label: "Coded 14 hours, drank 5 cups – balanced marathon" },
-  { x: 3,  y: 3,  label: "Coded 3 hours, drank 3 cups – coffee-fueled sprint" },
-  { x: 2,  y: 4,  label: "Coded 4 hours, drank 2 cups – steady afternoon" }
-];
-  
-new Chart(ctxScatter, {
-  type: "scatter",
-  data: {
-    datasets: [{
-      label: "Daily Cups vs Coding Hours",
-      data: scatterData,
-      pointRadius: 5,
-      pointBorderColor: "#189AB4",
-      pointBorderWidth: 1,
-      showLine: false
-    }]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: true,
-    scales: {
-      x: {
-        type: "linear",
-        title: { display: true, text: "Cups of Coffee" },
-        grid: { display: false }
-      },
-      y: {
-        type: "linear",
-        title: { display: true, text: "Coding Hours" },
-        grid: { display: false }
-      }
-    },
-    plugins: {
-      tooltip: {
-        callbacks: {
-          // Replace default "(x, y)" with your custom label
-          label(ctx) {
-            return ctx.raw.label;
-          }
-        }
-      }
-    }
-  }
-});
-
-</script>
-
- <!-- Contact -->
-    <section id="contact" class="text-center">
-      <h2 class="text-4xl font-bold text-amber-400 mb-4">get in touch</h2>
-      <p class="mb-6">Feel free to reach out for collaborations or just to say hi!</p>
-      <a href="mailto:ngliyang1999@gmail.com" class="inline-block bg-amber-400 text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-pink-300 transition">
-        Email Me
-      </a>
-    </section>
-
-  
-</main>
-
-  
-
-  <!-- FOOTER: Simple copyright info -->
-  <footer class="bg-gray-800 text-gray-400 py-4 text-center">
-    &copy; 2025 Liyang Ng. All rights reserved.
-  </footer>
-
-
-<script defer>
-  document.addEventListener("DOMContentLoaded", () => {
-    tsParticles.load("tsparticles", {
-      fpsLimit: 60,
-      detectRetina: true,
-      background: { color: "transparent" },
-      particles: {
-        number: {
-          value: 80,
-          density: { enable: true, area: 800 }
-        },
-        color: { value: "#ffd166" },      // bubble color
-        shape: { type: "circle" },
-        opacity: {
-          value: 0.3,
-          random: { enable: true, minimumValue: 0.1 },
-          anim: { enable: true, speed: 1, minimumValue: 0.1, sync: false }
-        },
-        size: {
-          value: 10,
-          random: { enable: true, minimumValue: 5 },
-          anim: { enable: true, speed: 5, size_min: 2, sync: false }
-        },
-        move: {
-          enable: true,
-          speed: 0.5,
-          direction: "none",
-          outModes: { default: "out" },
-          attract: { enable: false }
-        },
-        links: { enable: false }
-      },
-      interactivity: {
-        detectsOn: "canvas",
-        events: {
-          onHover: { enable: true, mode: "bubble" },
-          onClick: { enable: false },
-          resize: true
-        },
-        modes: {
-          bubble: {
-            distance: 150,
-            size: 20,
-            duration: 2,
-            opacity: 0.8
-          }
-        }
-      }
+      });
     });
-  });
-</script>
-
-
-
-  
+  </script>
 </body>
 </html>
+
