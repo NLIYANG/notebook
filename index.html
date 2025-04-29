@@ -372,19 +372,30 @@ const ctxScatter = document
 
 // <-- your data array, each point now has a `label` property -->
 const scatterData = [
+  // your original points
   { x: 2,  y: 5,  label: "Coded 5 hours, drank 2 cups of coffee" },
   { x: 3,  y: 7,  label: "Coded 7 hours, drank 3 cups of coffee" },
-  { x: 1,  y: 8,  label: "Coded 8 hours, drank 1 cups of coffee" },
+  { x: 1,  y: 8,  label: "Coded 8 hours, drank 1 cup of coffee" },
   { x: 4,  y: 9,  label: "Coded 9 hours, drank 4 cups of coffee" },
   { x: 3,  y: 8,  label: "Coded 8 hours, drank 3 cups of coffee" },
   { x: 2,  y: 6,  label: "Coded 6 hours, drank 2 cups of coffee" },
-    { x: 5,  y: 12,  label: "Coded 12 hours, drank 5 cups of coffee" },
-    { x: 6,  y: 14,  label: "Coded  14 hours, drank 6 cups of coffee" },
-    { x: 6,  y: 6,  label: "Coded 8 hours, drank 3 cups of coffee" },
-    { x: 5,  y: 10,  label: "Coded 8 hours, drank 3 cups of coffee" },
-    { x: 4,  y: 8,  label: "Coded 8 hours, drank 3 cups of coffee" },
+  { x: 5,  y: 12, label: "Coded 12 hours, drank 5 cups of coffee" },
+  { x: 6,  y: 14, label: "Coded 14 hours, drank 6 cups of coffee" },
+  { x: 6,  y: 6,  label: "Coded 6 hours, drank 6 cups – jittery but alive" },
+  { x: 5,  y: 10, label: "Coded 10 hours, drank 5 cups – lunchtime shuffle" },
+  { x: 4,  y: 8,  label: "Coded 8 hours, drank 4 cups – steady grind" },
+  { x: 7,  y: 16, label: "Coded 16 hours, drank 7 cups – survived on caffeine" },
+  { x: 8,  y: 18, label: "Coded 18 hours, drank 8 cups – nearing collapse" },
+  { x: 9,  y: 20, label: "Coded 20 hours, drank 9 cups – hallucinations set in" },
+  { x: 10, y: 22, label: "Coded 22 hours, drank 10 cups – coffee IV drip" },
+  { x: 11, y: 24, label: "Coded 24 hours, drank 11 cups – all-nighter champion" },
+  { x: 4,  y: 2,  label: "Coded 2 hours, drank 4 cups – morning rush" },
+  { x: 1,  y: 1,  label: "Coded 1 hour, drank 1 cup – easy start" },
+  { x: 5,  y: 14, label: "Coded 14 hours, drank 5 cups – balanced marathon" },
+  { x: 3,  y: 3,  label: "Coded 3 hours, drank 3 cups – coffee-fueled sprint" },
+  { x: 2,  y: 4,  label: "Coded 4 hours, drank 2 cups – steady afternoon" }
 ];
-
+  
 new Chart(ctxScatter, {
   type: "scatter",
   data: {
