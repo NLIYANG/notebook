@@ -1,87 +1,96 @@
 <!DOCTYPE html>
-<html lang="en" x-data="workPageData()">
+<html lang="en" x-data="workPage()" class="bg-gray-900 text-gray-200">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Work Page</title>
-  <!-- Tailwind CSS -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Work</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Alpine.js -->
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
 </head>
-<body class="bg-gray-100 font-sans text-gray-900">
-  <header class="bg-white shadow py-6">
-    <div class="max-w-4xl mx-auto px-4">
-      <h1 class="text-3xl font-bold">My Professional Journey</h1>
-      <p class="mt-2 text-gray-600">Overview of my experiences, achievements, and statistics.</p>
-    </div>
-  </header>
+<body>
 
-    <!-- Sections rendered dynamically -->
-    <template x-for="section in sections" :key="section.id">
-      <section class="mb-8 bg-white p-6 rounded-lg shadow">
-        <h2 class="text-2xl font-semibold mb-4" x-text="section.title"></h2>
-        <p class="text-gray-700 mb-4" x-text="section.content"></p>
-        <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
-          <template x-for="(value, label) in section.stats" :key="label">
-            <div class="bg-gray-50 p-4 rounded">
-              <p class="text-xl font-bold" x-text="value"></p>
-              <p class="text-gray-600" x-text="label"></p>
-            </div>
-          </template>
-        </div>
-      </section>
-    </template>
+  <div class="flex max-w-6xl mx-auto h-screen pt-16">
+
+    <!-- left nav -->
+    <aside class="w-1/4 pr-6 sticky top-16">
+      <ul class="space-y-4">
+        <template x-for="proj in projects" :key="proj.id">
+          <li>
+            <a
+              :href="`#${proj.id}`"
+              @mouseenter="active = proj.id"
+              @mouseleave="active = null"
+              :class="{
+                'text-white font-semibold before:block before:w-8 before:h-0.5 before:bg-pink-400 before:mb-1': active===proj.id,
+                'text-gray-500': active!==proj.id
+              }"
+              class="transition"
+            > 
+              <span x-text="proj.company"></span>
+            </a>
+          </li>
+        </template>
+      </ul>
+    </aside>
+
+    <!-- right content -->
+    <main class="flex-1 overflow-auto space-y-12">
+      <template x-for="proj in projects" :key="proj.id">
+        <section
+          :id="proj.id"
+          @mouseenter="active = proj.id"
+          @mouseleave="active = null"
+          :class="{
+            'bg-gray-800 shadow-lg ring-1 ring-pink-400': active===proj.id,
+            'hover:bg-gray-800 hover:ring-1 hover:ring-pink-400': active!==proj.id
+          }"
+          class="p-6 rounded-lg transition"
+        >
+          <div class="text-sm text-pink-300 mb-1" x-text="proj.dates"></div>
+          <h3 class="text-xl font-bold mb-2" x-text="proj.title"></h3>
+          <p class="text-gray-300 mb-4" x-text="proj.description"></p>
+          <div class="flex flex-wrap gap-2">
+            <template x-for="tag in proj.tags" :key="tag">
+              <span class="bg-pink-500 bg-opacity-20 text-pink-300 px-2 py-1 rounded-full text-sm">
+                <span x-text="tag"></span>
+              </span>
+            </template>
+          </div>
+        </section>
+      </template>
+    </main>
+  </div>
 
   <script>
-    function workPageData() {
+    function workPage() {
       return {
-        sections: [
+        active: null,
+        projects: [
           {
-            id: 1,
-            title: 'Professional Experience',
-            content: 'Describe your roles, responsibilities, and key learnings in each position you've held.',
-            stats: {
-              'Years in Industry': '5+',
-              'Companies Worked': '3',
-              'Projects Led': '12',
-              'Teams Managed': '2'
-            }
+            id: 'apple',
+            company: 'UI Engineer Co-op · Apple',
+            dates: 'Jul – Dec 2017',
+            title: 'Interactive Web Apps for Apple Music',
+            description: 'Built embeddable web player and in-browser auth flows.',
+            tags: ['JavaScript','SCSS','MusicKit.js','HTML']
           },
           {
-            id: 2,
-            title: 'Key Achievements',
-            content: 'Highlight awards, recognitions, and major milestones you've reached.',
-            stats: {
-              'Awards': '4',
-              'Certifications': '5',
-              'Publications': '2',
-              'Patents': '1'
-            }
+            id: 'scout',
+            company: 'Developer · Scout Studio',
+            dates: '2016 – 2017',
+            title: 'Pro-bono Brand & Website Builds',
+            description: 'Collaborated on new brands, design systems & web builds.',
+            tags: ['Jekyll','WordPress','JavaScript','SCSS']
           },
           {
-            id: 3,
-            title: 'Core Skills',
-            content: 'Showcase your primary skills and competencies.',
-            stats: {
-              'JavaScript': 'Expert',
-              'Python': 'Advanced',
-              'Data Analysis': 'Expert',
-              'UI/UX Design': 'Intermediate'
-            }
-          },
-          {
-            id: 4,
-            title: 'Education & Training',
-            content: 'Outline your educational background and professional training.',
-            stats: {
-              'Degrees': '2',
-              'Workshops': '8',
-              'Online Courses': '15',
-              'Conferences': '6'
-            }
+            id: 'starry',
+            company: 'Software Engineer Co-op · Starry',
+            dates: 'Jul – Dec 2016',
+            title: 'Android Customer-Facing Features',
+            description: 'Enhanced UI for Starry’s Android app and Analytics dashboard.',
+            tags: ['Cordova','Backbone','JavaScript','CSS']
           }
+          // …add as many as you like
         ]
       }
     }
