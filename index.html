@@ -159,7 +159,7 @@
       <h3 class="text-2xl font-semibold mb-2">
         President (Data & Analytics Initiative) @ USF CSCMP
       </h3>
-      <p class="text-gray-400 italic mb-4">2022 – Present</p>
+      <p class="text-gray-400 italic mb-4">2021 – 2023</p>
       <ul class=" space-y-2 text-lg">
         <li>Led data-driven mentorship matching, increasing internship placements by 25% through analysis of student preference data</li>
         <li>Built predictive models to forecast student engagement, driving a 49% increase in participation among students and faculty</li>
@@ -169,7 +169,7 @@
   
     <div>
       <h3 class="text-2xl font-semibold mb-2">Corporate Marketing Associate @ Kobie Marketing</h3>
-      <p class="text-gray-400 italic mb-4">Jun 2024 – Present</p>
+      <p class="text-gray-400 italic mb-4">April 2021-December 2021</p>
       <ul class="space-y-2 text-lg">
         <li>Worked closely with the Business Development Team to develop go-to-market strategies for B2B and CPG Fortune 100 companies</li>
         <li>Navigated complex cloud ecosystems to analyze emerging trends, identifying competitive advantages to increase prospecting list </li>
@@ -265,21 +265,87 @@ new Chart(document.getElementById('hobbiesChart').getContext('2d'), {
 });
 
 // 2) Skills Radar Chart
-new Chart(document.getElementById('skillsChart').getContext('2d'), {
+const ctxSkills = document
+  .getElementById('skillsChart')
+  .getContext('2d');
+
+new Chart(ctxSkills, {
   type: 'radar',
   data: {
-    labels: ['SQL','Python','Power BI','DAX','Communication'],
-    datasets:[{
-      label:'Proficiency',
-      data:[9,8,8,7,9],
-      backgroundColor:'rgba(255,159,64,0.4)',
-      borderColor:'rgba(255,159,64,1)',
-      borderWidth:2,
-      pointBackgroundColor:'rgba(255,159,64,1)'
-    }]
+    // 8 skill axes
+    labels: [
+      'Python',
+      'R',
+      'JavaScript',
+      'Power BI (DAX)',
+      'Leadership',
+      'Supply Chain',
+      'Marketing Strategy',
+      'Presentation Skills'
+    ],
+    datasets: [
+      {
+        label: 'Proficiency',
+        data: [6, 9, 5, 9, 10, 9, 6, 8],
+        backgroundColor: 'rgba(255,159,64,0.4)',
+        borderColor: 'rgba(255,159,64,1)',
+        borderWidth: 2,
+        pointBackgroundColor: 'rgba(255,159,64,1)'
+      },
+      {
+        label: 'Interest Level',
+        data: [9, 7, 10, 5, 6, 6, 7, 8],
+        backgroundColor: 'rgba(54,162,235,0.3)',
+        borderColor: 'rgba(54,162,235,1)',
+        borderWidth: 2,
+        pointBackgroundColor: 'rgba(54,162,235,1)'
+      },
+      {
+        label: 'Projects Completed',
+        data: [9, 9, 6, 7, 9, 9, 6, 7],
+        backgroundColor: 'rgba(75,192,192,0.3)',
+        borderColor: 'rgba(75,192,192,1)',
+        borderWidth: 2,
+        pointBackgroundColor: 'rgba(75,192,192,1)'
+      }
+    ]
   },
-  options:{ responsive:true, maintainAspectRatio:true, scales:{ r:{ beginAtZero:true, max:10, ticks:{ stepSize:2 } } }, plugins:{ legend:{ position:'top' } } }
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    scales: {
+      r: {
+        beginAtZero: true,
+        max: 10,
+        ticks: {
+          stepSize: 2
+        },
+        pointLabels: {
+          font: {
+            size: 14
+          }
+        }
+      }
+    },
+    plugins: {
+      legend: {
+        position: 'top'
+      },
+      tooltip: {
+        callbacks: {
+          label: ({ dataset, raw }) => {
+            return `${dataset.label}: ${raw}`;
+          }
+        }
+      }
+    }
+  }
 });
+
+
+
+
+  
 
 // 3) Weekly Productivity Line Chart
 new Chart(document.getElementById('productivityChart').getContext('2d'), {
