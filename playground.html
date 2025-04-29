@@ -3,33 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Liyang Ng | Bubble Hover Demo</title>
+  <title>Bubble Hover Demo</title>
 
-  <!-- Tailwind CSS (for quick styling) -->
-  <script src="https://cdn.tailwindcss.com" defer></script>
-  <!-- tsParticles core -->
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.min.js" defer></script>
+  <!-- Tailwind CSS (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- tsParticles core (defer so it loads after DOM parsing) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.min.js"></script>
 </head>
-
 <body class="relative overflow-hidden bg-gray-900 text-white">
 
-  <!-- 1) Particle layer: fills the screen -->
-  <div id="tsparticles" class="absolute inset-0"></div>
+  <!-- 1) Particle layer: full-screen, behind everything -->
+  <div id="tsparticles" class="fixed inset-0 z-[-10]"></div>
 
-  <!-- 2) Your page content goes here, stacked above the particles -->
+  <!-- 2) Your content on top of particles -->
   <div class="relative z-10 flex flex-col min-h-screen">
 
     <!-- NAVIGATION -->
     <nav class="bg-black bg-opacity-50 p-4">
       <div class="max-w-4xl mx-auto flex items-center justify-between">
-        <span class="text-xl font-mono">&lt;/&gt;</span>
+        <span class="text-2xl font-mono">&lt;/&gt;</span>
         <a href="#" class="text-lg font-semibold">Liyang Ng</a>
       </div>
     </nav>
 
     <!-- HERO -->
     <header class="flex-grow flex items-center justify-center">
-      <h1 class="text-5xl font-bold">Bubble Hover Effect</h1>
+      <h1 class="text-5xl font-bold">Hover over the bubbles!</h1>
     </header>
 
     <!-- FOOTER -->
@@ -38,7 +37,7 @@
     </footer>
   </div>
 
-  <!-- 3) Initialize tsParticles with bubble-on-hover -->
+  <!-- 3) Initialize tsParticles with “bubble on hover” -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       tsParticles.load("tsparticles", {
@@ -47,7 +46,7 @@
         background: { color: "transparent" },
         particles: {
           number: { value: 80, density: { enable: true, area: 800 } },
-          color: { value: "#ffffff" },
+          color: { value: "#ffd166" },
           shape: { type: "circle" },
           opacity: {
             value: 0.3,
@@ -88,4 +87,3 @@
   </script>
 </body>
 </html>
-
