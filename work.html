@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Work</title>
+  <title>My Life Stories</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
@@ -12,21 +12,21 @@
   <div class="flex max-w-6xl mx-auto h-screen pt-16">
 
     <!-- left nav -->
-    <aside class="w-1/4 pr-6 sticky top-16">
+    <aside class="w-1/4 pr-6 sticky top-16 overflow-y-auto">
       <ul class="space-y-4">
-        <template x-for="proj in projects" :key="proj.id">
+        <template x-for="story in stories" :key="story.id">
           <li>
             <a
-              :href="`#${proj.id}`"
-              @mouseenter="active = proj.id"
+              :href="`#${story.id}`"
+              @mouseenter="active = story.id"
               @mouseleave="active = null"
               :class="{
-                'text-white font-semibold before:block before:w-8 before:h-0.5 before:bg-pink-400 before:mb-1': active===proj.id,
-                'text-gray-500': active!==proj.id
+                'text-white font-semibold before:block before:w-8 before:h-0.5 before:bg-pink-400 before:mb-1': active===story.id,
+                'text-gray-500': active!==story.id
               }"
               class="transition"
-            > 
-              <span x-text="proj.company"></span>
+            >
+              <span x-text="story.year"></span> – <span x-text="story.title"></span>
             </a>
           </li>
         </template>
@@ -34,27 +34,27 @@
     </aside>
 
     <!-- right content -->
-    <main class="flex-1 overflow-auto space-y-12">
-      <template x-for="proj in projects" :key="proj.id">
+    <main class="flex-1 overflow-y-auto space-y-12 pr-4">
+      <template x-for="story in stories" :key="story.id">
         <section
-          :id="proj.id"
-          @mouseenter="active = proj.id"
+          :id="story.id"
+          @mouseenter="active = story.id"
           @mouseleave="active = null"
           :class="{
-            'bg-gray-800 shadow-lg ring-1 ring-pink-400': active===proj.id,
-            'hover:bg-gray-800 hover:ring-1 hover:ring-pink-400': active!==proj.id
+            'bg-gray-800 shadow-lg ring-1 ring-pink-400': active===story.id,
+            'hover:bg-gray-800 hover:ring-1 hover:ring-pink-400': active!==story.id
           }"
-          class="p-6 rounded-lg transition"
+          class="p-6 rounded-lg flex space-x-6 transition"
         >
-          <div class="text-sm text-pink-300 mb-1" x-text="proj.dates"></div>
-          <h3 class="text-xl font-bold mb-2" x-text="proj.title"></h3>
-          <p class="text-gray-300 mb-4" x-text="proj.description"></p>
-          <div class="flex flex-wrap gap-2">
-            <template x-for="tag in proj.tags" :key="tag">
-              <span class="bg-pink-500 bg-opacity-20 text-pink-300 px-2 py-1 rounded-full text-sm">
-                <span x-text="tag"></span>
-              </span>
-            </template>
+          <!-- thumbnail -->
+          <div class="flex-shrink-0 w-32 h-32 rounded-lg overflow-hidden">
+            <img :src="story.thumb" :alt="story.title + ' thumbnail'" class="object-cover w-full h-full" />
+          </div>
+          <!-- content -->
+          <div>
+            <div class="text-sm text-pink-300 mb-1" x-text="story.year"></div>
+            <h3 class="text-xl font-bold mb-2" x-text="story.title"></h3>
+            <p class="text-gray-300 mb-4 whitespace-pre-line" x-text="story.description"></p>
           </div>
         </section>
       </template>
@@ -65,32 +65,63 @@
     function workPage() {
       return {
         active: null,
-        projects: [
+        stories: [
           {
-            id: 'apple',
-            company: 'UI Engineer Co-op · Apple',
-            dates: 'Jul – Dec 2017',
-            title: 'Interactive Web Apps for Apple Music',
-            description: 'Built embeddable web player and in-browser auth flows.',
-            tags: ['JavaScript','SCSS','MusicKit.js','HTML']
+            id: 'story2018',
+            year: '2018',
+            title: 'Launched First Web App',
+            thumb: 'thumbs/web-app-2018.jpg',
+            description: 'Built and deployed my first interactive web application to track Bible study progress. Learned HTML, CSS, and basic JavaScript.\n\nCollaborated with youth group leaders to design the UI and gathered feedback for improvements.'
           },
           {
-            id: 'scout',
-            company: 'Developer · Scout Studio',
-            dates: '2016 – 2017',
-            title: 'Pro-bono Brand & Website Builds',
-            description: 'Collaborated on new brands, design systems & web builds.',
-            tags: ['Jekyll','WordPress','JavaScript','SCSS']
+            id: 'story2019',
+            year: '2019',
+            title: 'Joined Signode as Analyst',
+            thumb: 'thumbs/signode-2019.jpg',
+            description: 'Started my role as a Supply Chain Analyst at Signode. Developed forecasting models in Power BI and Python.\n\nLed a pilot project to automate inventory reports, reducing manual work by 40%.'
           },
           {
-            id: 'starry',
-            company: 'Software Engineer Co-op · Starry',
-            dates: 'Jul – Dec 2016',
-            title: 'Android Customer-Facing Features',
-            description: 'Enhanced UI for Starry’s Android app and Analytics dashboard.',
-            tags: ['Cordova','Backbone','JavaScript','CSS']
+            id: 'story2020',
+            year: '2020',
+            title: 'Bible Olympics Inception',
+            thumb: 'thumbs/bible-olympics-2020.jpg',
+            description: 'Conceptualized and organized the first annual Bible Olympics event for my church youth group.\n\nDesigned games, prepared materials, and built a GitHub-hosted score-tracker.'
+          },
+          {
+            id: 'story2021',
+            year: '2021',
+            title: 'Earned CP Forecasting Cert',
+            thumb: 'thumbs/cert-2021.jpg',
+            description: 'Completed the Certified Professional Forecaster program. Enhanced my predictive modeling skills with time-series analysis and R.'
+          },
+          {
+            id: 'story2022',
+            year: '2022',
+            title: 'Built Tap-to-Pay Prototype',
+            thumb: 'thumbs/tap-to-pay-2022.jpg',
+            description: 'Prototyped a tap-to-pay interface using BRICK and Stripe Terminal on iOS. Integrated NFC handling and demoed at a fintech meetup.'
+          },
+          {
+            id: 'story2023',
+            year: '2023',
+            title: 'Guitar Tutorial Series',
+            thumb: 'thumbs/guitar-2023.jpg',
+            description: 'Launched a YouTube series teaching guitar strumming patterns. Produced 12 tutorial videos and grew channel to 5k subscribers.'
+          },
+          {
+            id: 'story2024',
+            year: '2024',
+            title: 'Advanced ML Research',
+            thumb: 'thumbs/ml-2024.jpg',
+            description: 'Conducted a research project on demand forecasting using random forests and XGBoost in Python. Co-authored an internal white paper.'
+          },
+          {
+            id: 'story2025',
+            year: '2025',
+            title: 'Leading Youth Ministry Tech',
+            thumb: 'thumbs/ministry-2025.jpg',
+            description: 'Developed interactive digital devotionals and prayer trackers for my church’s youth ministry, improving engagement by 50%.'
           }
-          // …add as many as you like
         ]
       }
     }
