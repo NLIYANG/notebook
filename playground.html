@@ -3,80 +3,81 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bubble Hover Test</title>
-
-  <!-- Tailwind CSS for quick layout -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- tsParticles bundle (includes everything) -->
+  <title>Bubble-Attract Background</title>
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  <style>
+    /* make sure the canvas is full-screen and behind everything */
+    #tsparticles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+  </style>
 </head>
+<body class="bg-gray-900 text-white">
 
-<body class="relative overflow-hidden bg-gray-900 text-white">
+  <!-- your page content here -->
+  <h1 class="p-8 text-4xl">Hello, world!</h1>
 
-  <!--
-    1) The particle container must be fixed to fill the viewport,
-       and sit *behind* your content. We use inline style here
-       to guarantee the z-index works.
-  -->
-  <div
-    id="tsparticles"
-    style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1;"
-  ></div>
-
-  <!-- 2) Simple page content on top -->
-  <div class="relative z-10 flex flex-col items-center justify-center min-h-screen">
-    <h1 class="text-4xl font-bold mb-4">Hover over the background</h1>
-    <p>Watch the bubbles grow when you move your mouse.</p>
-  </div>
-
-  <!-- 3) Initialize tsParticles once the library is loaded -->
+  <!-- this second <script> is your custom config -->
   <script>
-    // Make sure tsParticles is available
-    if (!window.tsParticles) {
-      console.error("tsParticles not found – check your <script> src!");
-    } else {
-      tsParticles.load("tsparticles", {
-        fpsLimit: 60,
-        detectRetina: true,
-        background: { color: "transparent" },
-        particles: {
-          number: { value: 80, density: { enable: true, area: 800 } },
-          color: { value: "#ffd166" },
-          shape: { type: "circle" },
-          opacity: {
-            value: 0.3,
-            random: { enable: true, minimumValue: 0.1 },
-            anim: { enable: true, speed: 1, minimumValue: 0.1 }
-          },
-          size: {
-            value: 8,
-            random: { enable: true, minimumValue: 4 },
-            anim: { enable: true, speed: 4, minimumValue: 2 }
-          },
-          move: {
-            enable: true,
-            speed: 0.5,
-            outModes: { default: "out" }
-          },
-          links: { enable: false }
+    tsParticles.load("tsparticles", {
+      fullScreen: { enable: false }, // we already sized via CSS
+      particles: {
+        number: {
+          value: 40,
+          density: { enable: true, value_area: 800 }
         },
-        interactivity: {
-          detectsOn: "canvas",
-          events: {
-            onHover: { enable: true, mode: "bubble" },
-            onClick: { enable: false },
-            resize: true
-          },
-          modes: {
-            bubble: { distance: 150, size: 20, duration: 2, opacity: 1 }
+        shape: { type: "circle" },
+        size: {
+          value: { min: 4, max: 12 },
+          animation: {
+            enable: true,
+            speed: 2,
+            minimumValue: 4,
+            sync: false
+          }
+        },
+        opacity: {
+          value: { min: 0.2, max: 0.5 },
+          animation: {
+            enable: true,
+            speed: 1,
+            minimumValue: 0.2,
+            sync: false
+          }
+        },
+        move: {
+          enable: true,
+          speed: 0.5,
+          direction: "none",
+          outModes: { default: "out" }
+        }
+      },
+      interactivity: {
+        events: {
+          onHover: {
+            enable: true,
+            mode: "attract"
+          }
+        },
+        modes: {
+          attract: {
+            distance: 200,    // how far the “pull” reaches
+            duration: 0.4,    // how long the pull lasts per hover
+            speed: 3          // strength of the pull
           }
         }
-      }).then(() => {
-        console.log("tsParticles loaded & running!");
-      }).catch(err => {
-        console.error("tsParticles init error:", err);
-      });
-    }
+      },
+      detectRetina: true
+    });
   </script>
+
+  <!-- the invisible div for tsParticles -->
+  <div id="tsparticles"></div>
+
 </body>
 </html>
