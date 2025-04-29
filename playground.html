@@ -1,45 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bubble Hover Demo</title>
+  <title>Bubble Hover Test</title>
 
-  <!-- Tailwind CSS (CDN) -->
+  <!-- Tailwind CSS for quick layout -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- tsParticles core (defer so it loads after DOM parsing) -->
-  <script defer src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.min.js"></script>
+  <!-- tsParticles bundle (includes everything) -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
 </head>
+
 <body class="relative overflow-hidden bg-gray-900 text-white">
 
-  <!-- 1) Particle layer: full-screen, behind everything -->
-  <div id="tsparticles" class="fixed inset-0 z-[-10]"></div>
+  <!--
+    1) The particle container must be fixed to fill the viewport,
+       and sit *behind* your content. We use inline style here
+       to guarantee the z-index works.
+  -->
+  <div
+    id="tsparticles"
+    style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1;"
+  ></div>
 
-  <!-- 2) Your content on top of particles -->
-  <div class="relative z-10 flex flex-col min-h-screen">
-
-    <!-- NAVIGATION -->
-    <nav class="bg-black bg-opacity-50 p-4">
-      <div class="max-w-4xl mx-auto flex items-center justify-between">
-        <span class="text-2xl font-mono">&lt;/&gt;</span>
-        <a href="#" class="text-lg font-semibold">Liyang Ng</a>
-      </div>
-    </nav>
-
-    <!-- HERO -->
-    <header class="flex-grow flex items-center justify-center">
-      <h1 class="text-5xl font-bold">Hover over the bubbles!</h1>
-    </header>
-
-    <!-- FOOTER -->
-    <footer class="bg-black bg-opacity-50 p-4 text-center">
-      &copy; 2025 Liyang Ng
-    </footer>
+  <!-- 2) Simple page content on top -->
+  <div class="relative z-10 flex flex-col items-center justify-center min-h-screen">
+    <h1 class="text-4xl font-bold mb-4">Hover over the background</h1>
+    <p>Watch the bubbles grow when you move your mouse.</p>
   </div>
 
-  <!-- 3) Initialize tsParticles with “bubble on hover” -->
+  <!-- 3) Initialize tsParticles once the library is loaded -->
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
+    // Make sure tsParticles is available
+    if (!window.tsParticles) {
+      console.error("tsParticles not found – check your <script> src!");
+    } else {
       tsParticles.load("tsparticles", {
         fpsLimit: 60,
         detectRetina: true,
@@ -51,17 +46,16 @@
           opacity: {
             value: 0.3,
             random: { enable: true, minimumValue: 0.1 },
-            anim: { enable: true, speed: 1, minimumValue: 0.1, sync: false }
+            anim: { enable: true, speed: 1, minimumValue: 0.1 }
           },
           size: {
             value: 8,
             random: { enable: true, minimumValue: 4 },
-            anim: { enable: true, speed: 4, minimumValue: 2, sync: false }
+            anim: { enable: true, speed: 4, minimumValue: 2 }
           },
           move: {
             enable: true,
             speed: 0.5,
-            direction: "none",
             outModes: { default: "out" }
           },
           links: { enable: false }
@@ -74,16 +68,15 @@
             resize: true
           },
           modes: {
-            bubble: {
-              distance: 150,
-              size: 20,
-              duration: 2,
-              opacity: 1
-            }
+            bubble: { distance: 150, size: 20, duration: 2, opacity: 1 }
           }
         }
+      }).then(() => {
+        console.log("tsParticles loaded & running!");
+      }).catch(err => {
+        console.error("tsParticles init error:", err);
       });
-    });
+    }
   </script>
 </body>
 </html>
