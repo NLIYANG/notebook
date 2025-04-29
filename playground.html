@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bubble-Attract Background</title>
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  <title>Interactive Bubble Background</title>
   <style>
-    /* make sure the canvas is full-screen and behind everything */
+    /* make the page full-screen and dark */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #111827; /* dark gray */
+    }
+    /* the particle canvas behind everything */
     #tsparticles {
       position: fixed;
       top: 0;
@@ -15,69 +23,58 @@
       height: 100%;
       z-index: -1;
     }
+    /* example content so you can see it’s working */
+    h1 {
+      position: relative;
+      z-index: 1;
+      color: #fff;
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 40vh;
+    }
   </style>
 </head>
-<body class="bg-gray-900 text-white">
+<body>
 
-  <!-- your page content here -->
-  <h1 class="p-8 text-4xl">Hello, world!</h1>
+  <!-- 1) Canvas container -->
+  <div id="tsparticles"></div>
 
-  <!-- this second <script> is your custom config -->
+  <!-- 2) Example page content -->
+  <h1>Hello, world!</h1>
+
+  <!-- 3) Load tsParticles library -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+
+  <!-- 4) Your custom initialization -->
   <script>
     tsParticles.load("tsparticles", {
-      fullScreen: { enable: false }, // we already sized via CSS
+      fullScreen: { enable: false }, // we size it with CSS
       particles: {
-        number: {
-          value: 40,
-          density: { enable: true, value_area: 800 }
-        },
+        number: { value: 40, density: { enable: true, value_area: 800 } },
         shape: { type: "circle" },
         size: {
           value: { min: 4, max: 12 },
-          animation: {
-            enable: true,
-            speed: 2,
-            minimumValue: 4,
-            sync: false
-          }
+          animation: { enable: true, speed: 2, minimumValue: 4, sync: false }
         },
         opacity: {
           value: { min: 0.2, max: 0.5 },
-          animation: {
-            enable: true,
-            speed: 1,
-            minimumValue: 0.2,
-            sync: false
-          }
+          animation: { enable: true, speed: 1, minimumValue: 0.2, sync: false }
         },
-        move: {
-          enable: true,
-          speed: 0.5,
-          direction: "none",
-          outModes: { default: "out" }
-        }
+        move: { enable: true, speed: 0.5, outModes: { default: "out" } }
       },
       interactivity: {
-        events: {
-          onHover: {
-            enable: true,
-            mode: "attract"
-          }
-        },
+        events: { onHover: { enable: true, mode: "attract" } },
         modes: {
           attract: {
-            distance: 200,    // how far the “pull” reaches
-            duration: 0.4,    // how long the pull lasts per hover
-            speed: 3          // strength of the pull
+            distance: 200, // how far the “pull” reaches
+            duration: 0.4, // how long each pull lasts
+            speed: 3      // strength of the pull
           }
         }
       },
       detectRetina: true
     });
   </script>
-
-  <!-- the invisible div for tsParticles -->
-  <div id="tsparticles"></div>
 
 </body>
 </html>
